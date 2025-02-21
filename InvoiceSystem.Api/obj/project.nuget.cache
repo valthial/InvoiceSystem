@@ -1,0 +1,18 @@
+{
+  "version": 2,
+  "dgSpecHash": "Iuz4cZHaNZY=",
+  "success": true,
+  "projectFilePath": "C:\\Users\\valk\\source\\repos\\InvoiceSystem\\InvoiceSystem.Api\\InvoiceSystem.Api.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\valk\\.nuget\\packages\\microsoft.aspnetcore.openapi\\9.0.1\\microsoft.aspnetcore.openapi.9.0.1.nupkg.sha512",
+    "C:\\Users\\valk\\.nuget\\packages\\microsoft.openapi\\1.6.17\\microsoft.openapi.1.6.17.nupkg.sha512"
+  ],
+  "logs": [
+    {
+      "code": "NU1900",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Error occurred while getting package vulnerability data: Unable to load the service index for source https://pkgs.dev.azure.com/bhgprod/_packaging/BH-Tracing/nuget/v3/index.json."
+    }
+  ]
+}

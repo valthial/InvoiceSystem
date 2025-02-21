@@ -1,0 +1,11 @@
+C:\Users\valk\source\repos\InvoiceSystem\InvoiceSystem\InvoiceSystem.Application\bin\Debug\net9.0\InvoiceSystem.Application.deps.json
+C:\Users\valk\source\repos\InvoiceSystem\InvoiceSystem\InvoiceSystem.Application\bin\Debug\net9.0\InvoiceSystem.Application.dll
+C:\Users\valk\source\repos\InvoiceSystem\InvoiceSystem\InvoiceSystem.Application\bin\Debug\net9.0\InvoiceSystem.Application.pdb
+C:\Users\valk\source\repos\InvoiceSystem\InvoiceSystem\InvoiceSystem.Application\obj\Debug\net9.0\InvoiceSystem.Application.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\valk\source\repos\InvoiceSystem\InvoiceSystem\InvoiceSystem.Application\obj\Debug\net9.0\InvoiceSystem.Application.AssemblyInfoInputs.cache
+C:\Users\valk\source\repos\InvoiceSystem\InvoiceSystem\InvoiceSystem.Application\obj\Debug\net9.0\InvoiceSystem.Application.AssemblyInfo.cs
+C:\Users\valk\source\repos\InvoiceSystem\InvoiceSystem\InvoiceSystem.Application\obj\Debug\net9.0\InvoiceSystem.Application.csproj.CoreCompileInputs.cache
+C:\Users\valk\source\repos\InvoiceSystem\InvoiceSystem\InvoiceSystem.Application\obj\Debug\net9.0\InvoiceSystem.Application.dll
+C:\Users\valk\source\repos\InvoiceSystem\InvoiceSystem\InvoiceSystem.Application\obj\Debug\net9.0\refint\InvoiceSystem.Application.dll
+C:\Users\valk\source\repos\InvoiceSystem\InvoiceSystem\InvoiceSystem.Application\obj\Debug\net9.0\InvoiceSystem.Application.pdb
+C:\Users\valk\source\repos\InvoiceSystem\InvoiceSystem\InvoiceSystem.Application\obj\Debug\net9.0\ref\InvoiceSystem.Application.dll
