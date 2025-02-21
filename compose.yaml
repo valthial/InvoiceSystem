@@ -1,0 +1,21 @@
+﻿services:
+#  invoicesystem.api:
+#    image: invoicesystem.api
+#    container_name: InvoiceSystemAPI
+#    build:
+#      context: .
+#      dockerfile: InvoiceSystem.API/Dockerfile
+#    ports:
+#      - 5000:8080
+#      - 5001:8081
+  invoicesystem.db:
+    container_name: InvoiceSystemContainer
+    image: postgres:latest
+    environment:
+      - POSTGRES_DB=db
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=root
+    volumes:
+      - ./.container/invoicesystem.db/:/var/lib/postgresql/data
+    ports:
+      - 5432:5432

@@ -1,0 +1,9 @@
+@host = http://localhost:5251
+
+POST {{host}}/auth/register
+Content-Type: application/json
+
+{
+    "email": "valk@bunker-holding.com",
+    "password":"1234567"
+}

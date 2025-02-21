@@ -1,0 +1,26 @@
+﻿FROM mcr.microsoft.com/dotnet/aspnet:9.0 AS base
+USER $APP_UID
+WORKDIR /app
+EXPOSE 8080
+EXPOSE 8081
+
+FROM mcr.microsoft.com/dotnet/sdk:9.0 AS build
+ARG BUILD_CONFIGURATION=Release
+WORKDIR /src
+COPY ["InvoiceSystem.Api/InvoiceSystem.Api.csproj", "InvoiceSystem.Api/"]
+COPY ["InvoiceSystem.Application/InvoiceSystem.Application.csproj", "InvoiceSystem.Application/"]
+COPY ["InvoiceSystem.Domain/InvoiceSystem.Domain.csproj", "InvoiceSystem.Domain/"]
+COPY ["InvoiceSystem.Infrastructure/InvoiceSystem.Infrastructure.csproj", "InvoiceSystem.Infrastructure/"]
+RUN dotnet restore "InvoiceSystem.Api/InvoiceSystem.Api.csproj"
+COPY . .
+WORKDIR "/src/InvoiceSystem.Api"
+RUN dotnet build "InvoiceSystem.Api.csproj" -c $BUILD_CONFIGURATION -o /app/build
+
+FROM build AS publish
+ARG BUILD_CONFIGURATION=Release
+RUN dotnet publish "InvoiceSystem.Api.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
+
+FROM base AS final
+WORKDIR /app
+COPY --from=publish /app/publish .
+ENTRYPOINT ["dotnet", "InvoiceSystem.Api.dll"]

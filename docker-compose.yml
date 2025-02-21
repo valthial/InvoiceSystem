@@ -1,0 +1,26 @@
+version: "3.9"
+services:
+  invoicesystem.api:
+    image: ${DOCKER_REGISTRY-}invoicesystemapi
+    container_name: InvoiceSystem.Api
+    build:
+      context: .
+      dockerfile: InvoiceSystem.Api/Dockerfile
+    ports:
+      - "5000:8080"
+      - "5001:8081"
+    depends_on:
+      - impact.database
+
+  impact.database:
+    image: postgres:latest
+    container_name: Impact.Database
+    environment:
+      POSTGRES_DB: impact
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    volumes:
+      - ./.containers/db:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    restart: always
