@@ -1,6 +1,16 @@
-﻿namespace InvoiceSystem.Api.Controllers;
+﻿using System.Net;
+using Microsoft.AspNetCore.Mvc;
 
-public class InvoiceController
+namespace InvoiceSystem.Api.Controllers;
+
+[ApiController]
+[Route("api/invoice")]
+public class InvoiceController : ControllerBase
 {
-    
+    [HttpPost("CreateInvoice")]
+    public async Task<IActionResult> CreateInvoice([FromBody] HttpWebRequest request)
+    {
+        //TODO
+        return Ok();
+    }
 }

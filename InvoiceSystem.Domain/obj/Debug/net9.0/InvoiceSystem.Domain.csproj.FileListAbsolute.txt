@@ -9,3 +9,15 @@ C:\Users\valk\source\repos\InvoiceSystem\InvoiceSystem\InvoiceSystem.Domain\obj\
 C:\Users\valk\source\repos\InvoiceSystem\InvoiceSystem\InvoiceSystem.Domain\obj\Debug\net9.0\refint\InvoiceSystem.Domain.dll
 C:\Users\valk\source\repos\InvoiceSystem\InvoiceSystem\InvoiceSystem.Domain\obj\Debug\net9.0\InvoiceSystem.Domain.pdb
 C:\Users\valk\source\repos\InvoiceSystem\InvoiceSystem\InvoiceSystem.Domain\obj\Debug\net9.0\ref\InvoiceSystem.Domain.dll
+C:\Users\valk\source\repos\InvoiceSystem\InvoiceSystem.Domain\bin\Debug\net9.0\InvoiceSystem.Domain.deps.json
+C:\Users\valk\source\repos\InvoiceSystem\InvoiceSystem.Domain\bin\Debug\net9.0\InvoiceSystem.Domain.dll
+C:\Users\valk\source\repos\InvoiceSystem\InvoiceSystem.Domain\bin\Debug\net9.0\InvoiceSystem.Domain.pdb
+C:\Users\valk\source\repos\InvoiceSystem\InvoiceSystem.Domain\obj\Debug\net9.0\InvoiceSystem.Domain.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\valk\source\repos\InvoiceSystem\InvoiceSystem.Domain\obj\Debug\net9.0\InvoiceSystem.Domain.AssemblyInfoInputs.cache
+C:\Users\valk\source\repos\InvoiceSystem\InvoiceSystem.Domain\obj\Debug\net9.0\InvoiceSystem.Domain.AssemblyInfo.cs
+C:\Users\valk\source\repos\InvoiceSystem\InvoiceSystem.Domain\obj\Debug\net9.0\InvoiceSystem.Domain.csproj.CoreCompileInputs.cache
+C:\Users\valk\source\repos\InvoiceSystem\InvoiceSystem.Domain\obj\Debug\net9.0\InvoiceSystem.Domain.sourcelink.json
+C:\Users\valk\source\repos\InvoiceSystem\InvoiceSystem.Domain\obj\Debug\net9.0\InvoiceSystem.Domain.dll
+C:\Users\valk\source\repos\InvoiceSystem\InvoiceSystem.Domain\obj\Debug\net9.0\refint\InvoiceSystem.Domain.dll
+C:\Users\valk\source\repos\InvoiceSystem\InvoiceSystem.Domain\obj\Debug\net9.0\InvoiceSystem.Domain.pdb
+C:\Users\valk\source\repos\InvoiceSystem\InvoiceSystem.Domain\obj\Debug\net9.0\ref\InvoiceSystem.Domain.dll

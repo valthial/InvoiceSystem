@@ -1,8 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "UTEX/xY707M=",
+  "dgSpecHash": "qahy2bsrmLg=",
   "success": true,
   "projectFilePath": "C:\\Users\\valk\\source\\repos\\InvoiceSystem\\InvoiceSystem.Application\\InvoiceSystem.Application.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\valk\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\9.0.2\\microsoft.extensions.dependencyinjection.abstractions.9.0.2.nupkg.sha512"
+  ],
   "logs": []
 }
