@@ -6,7 +6,7 @@ public sealed class Company
 
     public string Id { get; private set; }
     public string Name { get; private set; }
-    public List<User> Users { get; private set; }
+    public List<Invoice> Invoices { get; set; }
 
     public static Company Create(string name)
     {

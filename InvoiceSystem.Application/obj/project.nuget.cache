@@ -1,10 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "qahy2bsrmLg=",
+  "dgSpecHash": "laEZHPcb8jU=",
   "success": true,
-  "projectFilePath": "C:\\Users\\valk\\source\\repos\\InvoiceSystem\\InvoiceSystem.Application\\InvoiceSystem.Application.csproj",
+  "projectFilePath": "C:\\Users\\val\\Documents\\GitHub\\InvoiceSystem\\InvoiceSystem.Application\\InvoiceSystem.Application.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\valk\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\9.0.2\\microsoft.extensions.dependencyinjection.abstractions.9.0.2.nupkg.sha512"
+    "C:\\Users\\val\\.nuget\\packages\\fluentvalidation\\12.0.0-preview1\\fluentvalidation.12.0.0-preview1.nupkg.sha512",
+    "C:\\Users\\val\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\9.0.2\\microsoft.extensions.dependencyinjection.abstractions.9.0.2.nupkg.sha512"
   ],
   "logs": []
 }

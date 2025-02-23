@@ -1,8 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "Ge9OrEwOzzk=",
+  "dgSpecHash": "5kOiyjI+hd4=",
   "success": true,
-  "projectFilePath": "C:\\Users\\valk\\source\\repos\\InvoiceSystem\\InvoiceSystem.Domain\\InvoiceSystem.Domain.csproj",
-  "expectedPackageFiles": [],
+  "projectFilePath": "C:\\Users\\val\\Documents\\GitHub\\InvoiceSystem\\InvoiceSystem.Domain\\InvoiceSystem.Domain.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\val\\.nuget\\packages\\fluentvalidation\\12.0.0-preview1\\fluentvalidation.12.0.0-preview1.nupkg.sha512"
+  ],
   "logs": []
 }
