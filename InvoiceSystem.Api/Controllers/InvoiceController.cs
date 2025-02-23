@@ -1,5 +1,7 @@
 ﻿using InvoiceSystem.Application.Dto;
+using InvoiceSystem.Application.Services;
 using InvoiceSystem.Domain.Entities;
+using InvoiceSystem.Domain.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -9,27 +11,46 @@ namespace InvoiceSystem.Api.Controllers;
 [Route("api/invoice")]
 public class InvoiceController : ControllerBase
 {
-    private readonly CreateInvoice _createInvoice;
+    private readonly IInvoiceRepository _invoiceRepository;
 
-    public InvoiceController(CreateInvoice createInvoice)
+    public InvoiceController(IInvoiceRepository invoiceRepository)
     {
-        _createInvoice = createInvoice;
+        _invoiceRepository = invoiceRepository;
     }
 
-    [HttpPost]
+    [HttpGet("sent")]
     [Authorize]
-    public async Task<IActionResult> CreateInvoice(InvoiceDTO invoiceDto)
+    public async Task<IActionResult> GetSentInvoices(
+        [FromQuery] string? counterPartyCompanyId,
+        [FromQuery] DateTimeOffset? dateIssued,
+        [FromQuery] string? invoiceId)
     {
-        var invoice = Invoice.Create( 
-            invoiceDto.DateIssued, 
-            invoiceDto.CounterPartyCompany, 
-            invoiceDto.CounterPartyCompanyId, 
-            invoiceDto.NetAmount,
-            invoiceDto.VatAmount,
-            invoiceDto.TotalAmount, 
-            invoiceDto.Description);
-        
-        await _createInvoice.Execute(invoice);
-        return Ok(invoice);
+        var companyId = User.Claims.FirstOrDefault(c => c.Type == "CompanyId")?.Value;
+
+        if (string.IsNullOrEmpty(companyId))
+        {
+            return Unauthorized("Company ID is missing in the token.");
+        }
+
+        var invoices = await _invoiceRepository.GetSentInvoicesAsync(companyId, counterPartyCompanyId, dateIssued, invoiceId);
+        return Ok(invoices);
+    }
+
+    [HttpGet("received")]
+    [Authorize]
+    public async Task<IActionResult> GetReceivedInvoices(
+        [FromQuery] string? counterPartyCompanyId,
+        [FromQuery] DateTimeOffset? dateIssued,
+        [FromQuery] string? invoiceId)
+    {
+        var companyId = User.Claims.FirstOrDefault(c => c.Type == "CompanyId")?.Value;
+
+        if (string.IsNullOrEmpty(companyId))
+        {
+            return Unauthorized("Company ID is missing in the token.");
+        }
+
+        var invoices = await _invoiceRepository.GetReceivedInvoicesAsync(companyId, counterPartyCompanyId, dateIssued, invoiceId);
+        return Ok(invoices);
     }
 }

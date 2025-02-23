@@ -258,3 +258,12 @@ C:\Users\val\Documents\GitHub\InvoiceSystem\InvoiceSystem.Api\obj\Debug\net9.0\s
 C:\Users\val\Documents\GitHub\InvoiceSystem\InvoiceSystem.Api\obj\Debug\net9.0\InvoiceS.5AE2EB4C.Up2Date
 C:\Users\val\Documents\GitHub\InvoiceSystem\InvoiceSystem.Api\obj\Debug\net9.0\InvoiceSystem.Api.genruntimeconfig.cache
 C:\Users\val\Documents\GitHub\InvoiceSystem\InvoiceSystem.Api\obj\Debug\net9.0\ref\InvoiceSystem.Api.dll
+C:\Users\val\Documents\GitHub\InvoiceSystem\InvoiceSystem.Api\bin\Debug\net9.0\BCrypt.Net-Next.dll
+C:\Users\val\Documents\GitHub\InvoiceSystem\InvoiceSystem.Api\bin\Debug\net9.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+C:\Users\val\Documents\GitHub\InvoiceSystem\InvoiceSystem.Api\bin\Debug\net9.0\Microsoft.IdentityModel.Abstractions.dll
+C:\Users\val\Documents\GitHub\InvoiceSystem\InvoiceSystem.Api\bin\Debug\net9.0\Microsoft.IdentityModel.JsonWebTokens.dll
+C:\Users\val\Documents\GitHub\InvoiceSystem\InvoiceSystem.Api\bin\Debug\net9.0\Microsoft.IdentityModel.Logging.dll
+C:\Users\val\Documents\GitHub\InvoiceSystem\InvoiceSystem.Api\bin\Debug\net9.0\Microsoft.IdentityModel.Protocols.dll
+C:\Users\val\Documents\GitHub\InvoiceSystem\InvoiceSystem.Api\bin\Debug\net9.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+C:\Users\val\Documents\GitHub\InvoiceSystem\InvoiceSystem.Api\bin\Debug\net9.0\Microsoft.IdentityModel.Tokens.dll
+C:\Users\val\Documents\GitHub\InvoiceSystem\InvoiceSystem.Api\bin\Debug\net9.0\System.IdentityModel.Tokens.Jwt.dll

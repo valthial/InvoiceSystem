@@ -10,6 +10,6 @@ public class InvoiceDTO
     public decimal VatAmount { get; set; }
     public decimal TotalAmount { get; set; }
     public string Description { get; set; }
-    public Guid CounterPartyCompanyId { get; set; }
-    public Company? CounterPartyCompany { get; set; }
+    public string CompanyId { get; set; }
+    public string CounterPartyCompanyId { get; set; }
 }
