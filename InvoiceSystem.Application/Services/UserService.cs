@@ -51,17 +51,11 @@ public class UserService
     public async Task<(string UserId, string CompanyId)?> ValidateUserCredentialsAsync(string email, string password)
     {
         var user = await _userRepository.GetUserByEmailAsync(email);
-
-        if (user == null || !VerifyPassword(password, user.PasswordHash))
-        {
-            return null;
-        }
-
+        if (user == null || !VerifyPassword(password, user.PasswordHash)) return null;
+        if (user.Company == null) return null;
+        
         return (user.Id, user.Company.Id);
     }
     
-    private bool VerifyPassword(string password, string passwordHash)
-    {
-        return BCrypt.Net.BCrypt.Verify(password, passwordHash);
-    }
+    private static bool VerifyPassword(string password, string passwordHash) => BCrypt.Net.BCrypt.Verify(password, passwordHash);
 }
