@@ -1,10 +1,9 @@
+using FluentValidation;
 using InvoiceSystem.Application.Dto;
 using InvoiceSystem.Domain.Entities;
 using InvoiceSystem.Domain.Interfaces;
+using InvoiceSystem.Domain.Validators;
 using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 
 namespace InvoiceSystem.Application.Services;
 
@@ -21,23 +20,18 @@ public class UserService
 
     public async Task<User> CreateUserAsync(UserDto userDto)
     {
-        if (string.IsNullOrWhiteSpace(userDto.Email))
-        {
-            throw new ArgumentException("Email cannot be null or whitespace.", nameof(userDto.Email));
-        }
+        var validator = new UserDtoValidator();
+        var validationResult = validator.Validate(userDto);
 
-        if (string.IsNullOrWhiteSpace(userDto.Password))
-        {
-            throw new ArgumentException("Password cannot be null or whitespace.", nameof(userDto.Password));
-        }
+        if (!validationResult.IsValid)
+            throw new ValidationException(validationResult.Errors);
 
         if (await _userRepository.UserExistsAsync(userDto.Email))
         {
             throw new InvalidOperationException($"A user with the email '{userDto.Email}' already exists.");
         }
-
+        
         var passwordHash = BCrypt.Net.BCrypt.HashPassword(userDto.Password);
-
         var user = User.Create(userDto.Email, passwordHash, userDto.Company, userDto.CompanyId);
         await _userRepository.CreateUserAsync(user);
 

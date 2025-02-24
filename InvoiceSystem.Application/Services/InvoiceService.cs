@@ -1,4 +1,6 @@
-﻿using InvoiceSystem.Application.Dto;
+﻿using FluentValidation;
+using InvoiceSystem.Application.Dto;
+using InvoiceSystem.Application.Validators;
 using InvoiceSystem.Domain.Entities;
 using InvoiceSystem.Domain.Interfaces;
 using Microsoft.Extensions.Logging;
@@ -17,26 +19,11 @@ public class InvoiceService
     }
     public async Task<Invoice> CreateInvoiceAsync(InvoiceDto invoiceDto)
     {
-        if (invoiceDto == null)
-        {
-            throw new ArgumentNullException(nameof(invoiceDto), "Invoice data cannot be null.");
-        }
+        var validator = new InvoiceDtoValidator();
+        var validationResult = validator.Validate(invoiceDto);
 
-        // Validate required fields
-        if (string.IsNullOrWhiteSpace(invoiceDto.IssuerCompanyId))
-        {
-            throw new ArgumentException("Issuer company ID is required.", nameof(invoiceDto.IssuerCompanyId));
-        }
-
-        if (string.IsNullOrWhiteSpace(invoiceDto.CounterPartyCompanyId))
-        {
-            throw new ArgumentException("Counter-party company ID is required.", nameof(invoiceDto.CounterPartyCompanyId));
-        }
-
-        if (invoiceDto.DateIssued == default)
-        {
-            throw new ArgumentException("Date issued is required.", nameof(invoiceDto.DateIssued));
-        }
+        if (!validationResult.IsValid)
+            throw new ValidationException(validationResult.Errors);
 
         if (await _invoiceRepository.InvoiceExistsAsync(invoiceDto.Id))
         {
@@ -51,7 +38,7 @@ public class InvoiceService
             invoiceDto.VatAmount,
             invoiceDto.TotalAmount,
             invoiceDto.Description);
-
+        
         await _invoiceRepository.CreateInvoiceAsync(invoice);
 
         _logger.LogInformation("Invoice created with ID: {InvoiceId}", invoice.Id);

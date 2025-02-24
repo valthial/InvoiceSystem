@@ -1,32 +1,33 @@
 using FluentValidation;
 using InvoiceSystem.Domain.Validators;
 
-namespace InvoiceSystem.Domain.Entities;
-
-public sealed class User
+namespace InvoiceSystem.Domain.Entities
 {
-    public string Id { get; private set; }
-    public string Email { get; private set; }
-    public string PasswordHash { get; private set; }
-    public string? CompanyId { get; private set; }
-    public Company? Company { get; private set; }
-    
-    public static User Create(string email, string password, Company company, string companyId)
+    public sealed class User
     {
-        var user = new User()
+        public string Id { get; private set; }
+        public string Email { get; private set; }
+        public string PasswordHash { get; private set; }
+        public string? CompanyId { get; private set; }
+        public Company? Company { get; private set; }
+
+        public static User Create(string email, string passwordHash, Company company, string companyId)
         {
-            Email = email,
-            PasswordHash = password,
-            CompanyId = companyId,
-            Company = company
-        };
-        
-        var validator = new UserValidator();
-        var validationResult = validator.Validate(user);
+            var user = new User
+            {
+                Email = email,
+                PasswordHash = passwordHash,
+                CompanyId = companyId,
+                Company = company
+            };
 
-        if (!validationResult.IsValid)
-            throw new ValidationException(validationResult.Errors);
+            var validator = new UserValidator();
+            var validationResult = validator.Validate(user);
 
-        return user;
+            if (!validationResult.IsValid)
+                throw new ValidationException(validationResult.Errors);
+
+            return user;
+        }
     }
 }

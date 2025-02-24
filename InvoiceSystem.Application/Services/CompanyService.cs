@@ -1,12 +1,9 @@
 using InvoiceSystem.Domain.Entities;
 using InvoiceSystem.Domain.Interfaces;
 using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Threading.Tasks;
 using InvoiceSystem.Application.Dto;
-using InvoiceSystem.Domain.Validators;
+using InvoiceSystem.Application.Validators;
 
 namespace InvoiceSystem.Application.Services;
 
@@ -21,11 +18,11 @@ public class CompanyService
         _logger = logger;
     }
 
-    public async Task<Company> CreateCompanyAsync(Company companyDto)
+    public async Task<Company> CreateCompanyAsync(CompanyDto companyDto)
     {
-        var validator = new CompanyValidator();
+        var validator = new CompanyDtoValidator();
         var validationResult = await validator.ValidateAsync(companyDto);
-        
+    
         if(!validationResult.IsValid)
             throw new ValidationException(validationResult.Errors.ToString());
 
@@ -36,7 +33,7 @@ public class CompanyService
 
         var company = Company.Create(companyDto.Name);
         await _companyRepository.CreateCompanyAsync(company);
-        _logger.LogInformation("IssuerCompany created with ID: {IssuerCompanyId}", company.Id);
+        _logger.LogInformation("Company created with ID: {CompanyId}", company.Id);
         return company;
     }
 

@@ -1,5 +1,5 @@
+using InvoiceSystem.Application.Dto;
 using InvoiceSystem.Application.Services;
-using InvoiceSystem.Domain.Entities;
 using Microsoft.AspNetCore.Mvc;
 
 [ApiController]
@@ -14,7 +14,7 @@ public class CompanyController : ControllerBase
     }
 
     [HttpPost(Name = "CreateCompany")]
-    public async Task<IActionResult> CreateCompany([FromBody] Company companyDto)
+    public async Task<IActionResult> CreateCompany([FromBody] CompanyDto companyDto)
     {
         if (!ModelState.IsValid)
         {

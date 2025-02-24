@@ -1,6 +1,5 @@
 ﻿using InvoiceSystem.Application.Dto;
 using InvoiceSystem.Application.Services;
-using InvoiceSystem.Infrastructure.Repositories;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 

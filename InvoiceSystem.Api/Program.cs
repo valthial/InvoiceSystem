@@ -1,7 +1,6 @@
 using InvoiceSystem.Application;
 using InvoiceSystem.Application.Services;
 using InvoiceSystem.Domain.Interfaces;
-using InvoiceSystem.Infrastructure;
 using InvoiceSystem.Infrastructure.Repositories;
 using InvoiceSystem.Infrastructure.Repositories.Authentication;
 using Microsoft.AspNetCore.Authentication;

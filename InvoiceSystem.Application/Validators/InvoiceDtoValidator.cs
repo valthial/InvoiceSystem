@@ -1,11 +1,11 @@
 ﻿using FluentValidation;
-using InvoiceSystem.Domain.Entities;
+using InvoiceSystem.Application.Dto;
 
-namespace InvoiceSystem.Domain.Validators
+namespace InvoiceSystem.Application.Validators
 {
-    public class InvoiceValidator : AbstractValidator<Invoice>
+    public class InvoiceDtoValidator : AbstractValidator<InvoiceDto>
     {
-        public InvoiceValidator()
+        public InvoiceDtoValidator()
         {
             RuleFor(x => x.Id).NotNull().WithMessage("Invoice data cannot be null.");
             RuleFor(x => x.IssuerCompanyId)
