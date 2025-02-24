@@ -11,6 +11,7 @@
           "InvoiceSystem.Application": "1.0.0",
           "InvoiceSystem.Infrastructure": "1.0.0",
           "Microsoft.AspNetCore.Authentication.JwtBearer": "9.0.2",
+          "Microsoft.AspNetCore.Http.Abstractions": "2.3.0",
           "Microsoft.EntityFrameworkCore": "9.0.2",
           "Microsoft.EntityFrameworkCore.Design": "9.0.2",
           "Microsoft.Extensions.DependencyInjection.Abstractions": "9.0.2",
@@ -55,6 +56,17 @@
             "assemblyVersion": "9.0.2.0",
             "fileVersion": "9.0.225.6704"
           }
+        }
+      },
+      "Microsoft.AspNetCore.Http.Abstractions/2.3.0": {
+        "dependencies": {
+          "Microsoft.AspNetCore.Http.Features": "2.3.0",
+          "System.Text.Encodings.Web": "8.0.0"
+        }
+      },
+      "Microsoft.AspNetCore.Http.Features/2.3.0": {
+        "dependencies": {
+          "Microsoft.Extensions.Primitives": "9.0.2"
         }
       },
       "Microsoft.Bcl.AsyncInterfaces/7.0.0": {
@@ -1410,6 +1422,7 @@
           "System.Text.Encoding": "4.3.0"
         }
       },
+      "System.Text.Encodings.Web/8.0.0": {},
       "System.Text.Json/9.0.2": {
         "runtime": {
           "lib/net9.0/System.Text.Json.dll": {
@@ -1491,6 +1504,7 @@
           "BCrypt.Net-Next": "4.0.3",
           "InvoiceSystem.Domain": "1.0.0",
           "Microsoft.Extensions.DependencyInjection.Abstractions": "9.0.2",
+          "Microsoft.Extensions.Logging.Abstractions": "9.0.2",
           "System.IdentityModel.Tokens.Jwt": "8.0.1"
         },
         "runtime": {
@@ -1563,6 +1577,20 @@
       "sha512": "sha512-p3WhJqzvf6uuQiYpxARdC4Yr+UquZzzk7ZGun4MSufx3Mi9kmfjlU0e2MiBRHYWQdfx2HjU0ifaHJecJ7lXqug==",
       "path": "microsoft.aspnetcore.authentication.jwtbearer/9.0.2",
       "hashPath": "microsoft.aspnetcore.authentication.jwtbearer.9.0.2.nupkg.sha512"
+    },
+    "Microsoft.AspNetCore.Http.Abstractions/2.3.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-39r9PPrjA6s0blyFv5qarckjNkaHRA5B+3b53ybuGGNTXEj1/DStQJ4NWjFL6QTRQpL9zt7nDyKxZdJOlcnq+Q==",
+      "path": "microsoft.aspnetcore.http.abstractions/2.3.0",
+      "hashPath": "microsoft.aspnetcore.http.abstractions.2.3.0.nupkg.sha512"
+    },
+    "Microsoft.AspNetCore.Http.Features/2.3.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-f10WUgcsKqrkmnz6gt8HeZ7kyKjYN30PO7cSic1lPtH7paPtnQqXPOveul/SIPI43PhRD4trttg4ywnrEmmJpA==",
+      "path": "microsoft.aspnetcore.http.features/2.3.0",
+      "hashPath": "microsoft.aspnetcore.http.features.2.3.0.nupkg.sha512"
     },
     "Microsoft.Bcl.AsyncInterfaces/7.0.0": {
       "type": "package",
@@ -2417,6 +2445,13 @@
       "sha512": "sha512-YVMK0Bt/A43RmwizJoZ22ei2nmrhobgeiYwFzC4YAN+nue8RF6djXDMog0UCn+brerQoYVyaS+ghy9P/MUVcmw==",
       "path": "system.text.encoding.extensions/4.3.0",
       "hashPath": "system.text.encoding.extensions.4.3.0.nupkg.sha512"
+    },
+    "System.Text.Encodings.Web/8.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-yev/k9GHAEGx2Rg3/tU6MQh4HGBXJs70y7j1LaM1i/ER9po+6nnQ6RRqTJn1E7Xu0fbIFK80Nh5EoODxrbxwBQ==",
+      "path": "system.text.encodings.web/8.0.0",
+      "hashPath": "system.text.encodings.web.8.0.0.nupkg.sha512"
     },
     "System.Text.Json/9.0.2": {
       "type": "package",

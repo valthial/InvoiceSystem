@@ -1,8 +1,10 @@
 using InvoiceSystem.Application.Dto;
 using InvoiceSystem.Application.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 [ApiController]
+[Authorize]
 [Route("api/v1/company")]
 public class CompanyController : ControllerBase
 {

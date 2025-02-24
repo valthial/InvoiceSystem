@@ -1,14 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "8NueAiEx5D0=",
+  "dgSpecHash": "2UMjES4LBeA=",
   "success": true,
   "projectFilePath": "C:\\Users\\valk\\Documents\\GitHub\\InvoiceSystem\\InvoiceSystem.Infrastructure\\InvoiceSystem.Infrastructure.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\valk\\.nuget\\packages\\bcrypt.net-next\\4.0.3\\bcrypt.net-next.4.0.3.nupkg.sha512",
     "C:\\Users\\valk\\.nuget\\packages\\fluentvalidation\\12.0.0-preview1\\fluentvalidation.12.0.0-preview1.nupkg.sha512",
     "C:\\Users\\valk\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
-    "C:\\Users\\valk\\.nuget\\packages\\microsoft.aspnetcore.http.abstractions\\2.3.0\\microsoft.aspnetcore.http.abstractions.2.3.0.nupkg.sha512",
-    "C:\\Users\\valk\\.nuget\\packages\\microsoft.aspnetcore.http.features\\2.3.0\\microsoft.aspnetcore.http.features.2.3.0.nupkg.sha512",
     "C:\\Users\\valk\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\7.0.0\\microsoft.bcl.asyncinterfaces.7.0.0.nupkg.sha512",
     "C:\\Users\\valk\\.nuget\\packages\\microsoft.build.framework\\17.8.3\\microsoft.build.framework.17.8.3.nupkg.sha512",
     "C:\\Users\\valk\\.nuget\\packages\\microsoft.build.locator\\1.7.8\\microsoft.build.locator.1.7.8.nupkg.sha512",
@@ -123,7 +121,6 @@
     "C:\\Users\\valk\\.nuget\\packages\\system.security.cryptography.x509certificates\\4.3.0\\system.security.cryptography.x509certificates.4.3.0.nupkg.sha512",
     "C:\\Users\\valk\\.nuget\\packages\\system.text.encoding\\4.3.0\\system.text.encoding.4.3.0.nupkg.sha512",
     "C:\\Users\\valk\\.nuget\\packages\\system.text.encoding.extensions\\4.3.0\\system.text.encoding.extensions.4.3.0.nupkg.sha512",
-    "C:\\Users\\valk\\.nuget\\packages\\system.text.encodings.web\\8.0.0\\system.text.encodings.web.8.0.0.nupkg.sha512",
     "C:\\Users\\valk\\.nuget\\packages\\system.text.json\\9.0.2\\system.text.json.9.0.2.nupkg.sha512",
     "C:\\Users\\valk\\.nuget\\packages\\system.text.regularexpressions\\4.3.0\\system.text.regularexpressions.4.3.0.nupkg.sha512",
     "C:\\Users\\valk\\.nuget\\packages\\system.threading\\4.3.0\\system.threading.4.3.0.nupkg.sha512",

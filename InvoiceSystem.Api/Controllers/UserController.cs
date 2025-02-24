@@ -1,10 +1,12 @@
 ﻿using InvoiceSystem.Application.Dto;
 using Microsoft.AspNetCore.Mvc;
 using InvoiceSystem.Application.Services;
+using Microsoft.AspNetCore.Authorization;
 
 namespace InvoiceSystem.Api.Controllers;
 
 [ApiController]
+[Authorize]
 [Route("api/v1/users")]
 public class UserController : ControllerBase
 {

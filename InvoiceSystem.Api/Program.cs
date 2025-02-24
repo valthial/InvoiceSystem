@@ -1,13 +1,36 @@
+using System.Text;
 using InvoiceSystem.Application;
-using InvoiceSystem.Application.Services;
-using InvoiceSystem.Domain.Interfaces;
-using InvoiceSystem.Infrastructure.Repositories;
-using InvoiceSystem.Infrastructure.Repositories.Authentication;
-using Microsoft.AspNetCore.Authentication;
-using Microsoft.EntityFrameworkCore;
+using InvoiceSystem.Infrastructure;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddInfrastructure(builder.Configuration.GetConnectionString("DefaultConnection"));
+builder.Services.AddApplication();
+builder.Services.AddControllers();
+
+var jwtSettings = builder.Configuration.GetSection("JwtSettings");
+
+builder.Services.AddAuthentication(options =>
+    {
+        options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+        options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+    })
+    .AddJwtBearer(options =>
+    {
+        options.TokenValidationParameters = new TokenValidationParameters
+        {
+            ValidateIssuer = false,
+            ValidateAudience = false,
+            ValidateIssuerSigningKey = true,
+            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSettings["HardcodedToken"])),
+            ValidateLifetime = false
+        };
+    });
+
+builder.Services.AddAuthorization();
 
 builder.Services.AddSwaggerGen(c =>
 {
@@ -26,25 +49,6 @@ builder.Services.AddSwaggerGen(c =>
         });
 });
 
-builder.Services.AddAuthentication("HardcodedAuth")
-    .AddScheme<AuthenticationSchemeOptions, AuthHandler>("HardcodedAuth", null);
-
-builder.Services.AddDbContext<AppDbContext>(options =>
-    options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
-
-builder.Services.Configure<Microsoft.AspNetCore.HttpsPolicy.HttpsRedirectionOptions>(options =>
-    options.HttpsPort = 5000);
-
-builder.Services.AddApplication();
-builder.Services.AddControllers();
-
-builder.Services.AddScoped<UserService>();
-builder.Services.AddScoped<CompanyService>();
-builder.Services.AddScoped<InvoiceService>();
-builder.Services.AddScoped<IUserRepository, UserRepository>();
-builder.Services.AddScoped<ICompanyRepository, CompanyRepository>();
-builder.Services.AddScoped<IInvoiceRepository, InvoiceRepository>();
-
 var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
@@ -58,6 +62,6 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.UseAuthentication();
-app.UseAuthentication();
+app.UseAuthorization();
 app.MapControllers();
 app.Run();
