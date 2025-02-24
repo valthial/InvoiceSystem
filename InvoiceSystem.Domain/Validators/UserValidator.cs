@@ -7,8 +7,7 @@ public class UserValidator: AbstractValidator<User>
 {
     public UserValidator()
     {
-        RuleFor(x => x.Email).Null().WithMessage("User email cannot be null or empty.");
-        RuleFor(x => x.CompanyId).Null().WithMessage("User companyId cannot be null or empty.");
-        RuleFor(x => x.PasswordHash).Null().WithMessage("User password cannot be null or empty.");
+        RuleFor(x => x.Email).NotNull().WithMessage("User email cannot be null or empty.");
+        RuleFor(x => x.PasswordHash).NotNull().WithMessage("User password cannot be null or empty.");
     }
 }

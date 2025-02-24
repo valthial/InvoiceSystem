@@ -13,17 +13,17 @@ public sealed class Invoice
     public decimal VatAmount { get; private set; }
     public decimal TotalAmount { get; private set; }
     public string Description { get; private set; }
-    public string CompanyId { get; private set; }
-    public Company Company { get; private set; }
+    public string IssuerCompanyId { get; private set; }
+    public Company IssuerCompany { get; private set; }
     public string CounterPartyCompanyId { get; private set; }
     public Company CounterPartyCompany { get; private set; }
 
-    public static Invoice Create(DateTimeOffset dateIssued, string companyId, string counterPartyCompanyId, decimal netAmount, decimal vatAmount, decimal totalAmount, string description)
+    public static Invoice Create(DateTimeOffset dateIssued, string issuerCompanyId, string counterPartyCompanyId, decimal netAmount, decimal vatAmount, decimal totalAmount, string description)
     {
         var invoice = new Invoice()
         {
             DateIssued = dateIssued,
-            CompanyId = companyId,
+            IssuerCompanyId = issuerCompanyId,
             CounterPartyCompanyId = counterPartyCompanyId,
             NetAmount = netAmount,
             VatAmount = vatAmount,

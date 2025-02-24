@@ -11,6 +11,8 @@ services:
       - "5001:8081"
     depends_on:
       - impact.database
+    networks:
+      - custom_network
 
   impact.database:
     image: postgres:latest
@@ -22,5 +24,14 @@ services:
     volumes:
       - ./.containers/db:/var/lib/postgresql/data
     ports:
-      - "5432:5432"
+      - "8888:5432"
     restart: always
+    networks:
+     - custom_network
+       
+volumes:
+  postgres_data:
+    
+networks:
+  custom_network:
+   driver: bridge

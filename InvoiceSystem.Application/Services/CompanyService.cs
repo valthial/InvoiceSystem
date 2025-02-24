@@ -1,21 +1,42 @@
 using InvoiceSystem.Domain.Entities;
 using InvoiceSystem.Domain.Interfaces;
+using Microsoft.Extensions.Logging;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Threading.Tasks;
+using InvoiceSystem.Application.Dto;
+using InvoiceSystem.Domain.Validators;
 
 namespace InvoiceSystem.Application.Services;
 
 public class CompanyService
 {
     private readonly ICompanyRepository _companyRepository;
+    private readonly ILogger<CompanyService> _logger;
 
-    public CompanyService(ICompanyRepository companyRepository)
+    public CompanyService(ICompanyRepository companyRepository, ILogger<CompanyService> logger)
     {
         _companyRepository = companyRepository;
+        _logger = logger;
     }
 
-    public async Task<Company> CreateCompanyAsync(string name, IEnumerable<User>? users)
+    public async Task<Company> CreateCompanyAsync(Company companyDto)
     {
-        var company = Company.Create(name, users);
-        await _companyRepository.AddCompanyAsync(company);
+        var validator = new CompanyValidator();
+        var validationResult = await validator.ValidateAsync(companyDto);
+        
+        if(!validationResult.IsValid)
+            throw new ValidationException(validationResult.Errors.ToString());
+
+        if (await _companyRepository.CompanyExistsAsync(companyDto.Id))
+        {
+            throw new InvalidOperationException($"A company with the name '{companyDto.Id}' already exists.");
+        }
+
+        var company = Company.Create(companyDto.Name);
+        await _companyRepository.CreateCompanyAsync(company);
+        _logger.LogInformation("IssuerCompany created with ID: {IssuerCompanyId}", company.Id);
         return company;
     }
 
@@ -24,8 +45,8 @@ public class CompanyService
         return await _companyRepository.GetCompanyByIdAsync(id);
     }
 
-    public async Task<List<Company>> GetAllCompaniesAsync()
+    public async Task<List<Company>> GetAllCompaniesAsync(int page, int pageSize)
     {
-        return await _companyRepository.GetAllCompaniesAsync();
+        return await _companyRepository.GetAllCompaniesAsync(page, pageSize);
     }
 }

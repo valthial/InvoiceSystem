@@ -6,22 +6,34 @@ namespace InvoiceSystem.Infrastructure.Repositories;
 
 public class CompanyRepository : ICompanyRepository
 {
-    private readonly List<Company> _companies = new();
+    private readonly AppDbContext _context;
 
-    public Task<Company?> GetCompanyByIdAsync(string id)
+    public CompanyRepository(AppDbContext context)
     {
-        var company = _companies.FirstOrDefault(c => c.Id == id);
-        return Task.FromResult(company);
+        _context = context;
     }
 
-    public Task<List<Company>> GetAllCompaniesAsync()
+    public async Task CreateCompanyAsync(Company company)
     {
-        return Task.FromResult(_companies);
+        _context.Companies.Add(company);
+        await _context.SaveChangesAsync();
     }
 
-    public Task AddCompanyAsync(Company company)
+    public async Task<Company?> GetCompanyByIdAsync(string id)
     {
-        _companies.Add(company);
-        return Task.CompletedTask;
+        return await _context.Companies.FirstOrDefaultAsync(c => c.Id == id);
+    }
+
+    public async Task<List<Company>> GetAllCompaniesAsync(int page, int pageSize)
+    {
+        return await _context.Companies
+            .Skip((page - 1) * pageSize)
+            .Take(pageSize)
+            .ToListAsync();
+    }
+
+    public async Task<bool> CompanyExistsAsync(string id)
+    {
+        return await _context.Companies.AnyAsync(c => c.Id == id);
     }
 }

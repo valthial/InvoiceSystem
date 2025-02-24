@@ -34,3 +34,16 @@ C:\Users\val\Documents\GitHub\InvoiceSystem\InvoiceSystem.Domain\obj\Debug\net9.
 C:\Users\val\Documents\GitHub\InvoiceSystem\InvoiceSystem.Domain\obj\Debug\net9.0\refint\InvoiceSystem.Domain.dll
 C:\Users\val\Documents\GitHub\InvoiceSystem\InvoiceSystem.Domain\obj\Debug\net9.0\InvoiceSystem.Domain.pdb
 C:\Users\val\Documents\GitHub\InvoiceSystem\InvoiceSystem.Domain\obj\Debug\net9.0\ref\InvoiceSystem.Domain.dll
+C:\Users\valk\Documents\GitHub\InvoiceSystem\InvoiceSystem.Domain\bin\Debug\net9.0\InvoiceSystem.Domain.deps.json
+C:\Users\valk\Documents\GitHub\InvoiceSystem\InvoiceSystem.Domain\bin\Debug\net9.0\InvoiceSystem.Domain.dll
+C:\Users\valk\Documents\GitHub\InvoiceSystem\InvoiceSystem.Domain\bin\Debug\net9.0\InvoiceSystem.Domain.pdb
+C:\Users\valk\Documents\GitHub\InvoiceSystem\InvoiceSystem.Domain\obj\Debug\net9.0\InvoiceSystem.Domain.csproj.AssemblyReference.cache
+C:\Users\valk\Documents\GitHub\InvoiceSystem\InvoiceSystem.Domain\obj\Debug\net9.0\InvoiceSystem.Domain.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\valk\Documents\GitHub\InvoiceSystem\InvoiceSystem.Domain\obj\Debug\net9.0\InvoiceSystem.Domain.AssemblyInfoInputs.cache
+C:\Users\valk\Documents\GitHub\InvoiceSystem\InvoiceSystem.Domain\obj\Debug\net9.0\InvoiceSystem.Domain.AssemblyInfo.cs
+C:\Users\valk\Documents\GitHub\InvoiceSystem\InvoiceSystem.Domain\obj\Debug\net9.0\InvoiceSystem.Domain.csproj.CoreCompileInputs.cache
+C:\Users\valk\Documents\GitHub\InvoiceSystem\InvoiceSystem.Domain\obj\Debug\net9.0\InvoiceSystem.Domain.sourcelink.json
+C:\Users\valk\Documents\GitHub\InvoiceSystem\InvoiceSystem.Domain\obj\Debug\net9.0\InvoiceSystem.Domain.dll
+C:\Users\valk\Documents\GitHub\InvoiceSystem\InvoiceSystem.Domain\obj\Debug\net9.0\refint\InvoiceSystem.Domain.dll
+C:\Users\valk\Documents\GitHub\InvoiceSystem\InvoiceSystem.Domain\obj\Debug\net9.0\InvoiceSystem.Domain.pdb
+C:\Users\valk\Documents\GitHub\InvoiceSystem\InvoiceSystem.Domain\obj\Debug\net9.0\ref\InvoiceSystem.Domain.dll

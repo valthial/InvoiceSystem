@@ -9,8 +9,7 @@ namespace InvoiceSystem.Infrastructure;
 public static class DependencyInjection
 {
     public static IServiceCollection AddInfrastructure(
-        this IServiceCollection services,
-        IConfiguration configuration, string connectionString)
+        this IServiceCollection services, string connectionString)
     {
 
         services.AddDbContext<AppDbContext>(options =>

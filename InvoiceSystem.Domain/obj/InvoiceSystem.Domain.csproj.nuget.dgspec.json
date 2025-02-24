@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\val\\Documents\\GitHub\\InvoiceSystem\\InvoiceSystem.Domain\\InvoiceSystem.Domain.csproj": {}
+    "C:\\Users\\valk\\Documents\\GitHub\\InvoiceSystem\\InvoiceSystem.Domain\\InvoiceSystem.Domain.csproj": {}
   },
   "projects": {
-    "C:\\Users\\val\\Documents\\GitHub\\InvoiceSystem\\InvoiceSystem.Domain\\InvoiceSystem.Domain.csproj": {
+    "C:\\Users\\valk\\Documents\\GitHub\\InvoiceSystem\\InvoiceSystem.Domain\\InvoiceSystem.Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\val\\Documents\\GitHub\\InvoiceSystem\\InvoiceSystem.Domain\\InvoiceSystem.Domain.csproj",
+        "projectUniqueName": "C:\\Users\\valk\\Documents\\GitHub\\InvoiceSystem\\InvoiceSystem.Domain\\InvoiceSystem.Domain.csproj",
         "projectName": "InvoiceSystem.Domain",
-        "projectPath": "C:\\Users\\val\\Documents\\GitHub\\InvoiceSystem\\InvoiceSystem.Domain\\InvoiceSystem.Domain.csproj",
-        "packagesPath": "C:\\Users\\val\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\val\\Documents\\GitHub\\InvoiceSystem\\InvoiceSystem.Domain\\obj\\",
+        "projectPath": "C:\\Users\\valk\\Documents\\GitHub\\InvoiceSystem\\InvoiceSystem.Domain\\InvoiceSystem.Domain.csproj",
+        "packagesPath": "C:\\Users\\valk\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\valk\\Documents\\GitHub\\InvoiceSystem\\InvoiceSystem.Domain\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\val\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\valk\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -26,7 +26,9 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "https://api.nuget.org/v3/index.json": {}
+          "C:\\Program Files\\dotnet\\library-packs": {},
+          "https://api.nuget.org/v3/index.json": {},
+          "https://pkgs.dev.azure.com/bhgprod/_packaging/BH-Tracing/nuget/v3/index.json": {}
         },
         "frameworks": {
           "net9.0": {
@@ -71,7 +73,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.101/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.102/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

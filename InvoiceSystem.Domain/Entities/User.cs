@@ -8,15 +8,17 @@ public sealed class User
     public string Id { get; private set; }
     public string Email { get; private set; }
     public string PasswordHash { get; private set; }
-    public Company CompanyId { get; private set; }
+    public string? CompanyId { get; private set; }
+    public Company? Company { get; private set; }
     
-    public static User Create(string id, string email, string password, Company companyId)
+    public static User Create(string email, string password, Company company, string companyId)
     {
         var user = new User()
         {
             Email = email,
             PasswordHash = password,
-            CompanyId = companyId
+            CompanyId = companyId,
+            Company = company
         };
         
         var validator = new UserValidator();

@@ -1,12 +1,9 @@
-using InvoiceSystem.Application.Dto;
 using InvoiceSystem.Application.Services;
-using Microsoft.AspNetCore.Authorization;
+using InvoiceSystem.Domain.Entities;
 using Microsoft.AspNetCore.Mvc;
 
-namespace InvoiceSystem.Api.Controllers;
-
 [ApiController]
-[Route("api/company")]
+[Route("api/v1/company")]
 public class CompanyController : ControllerBase
 {
     private readonly CompanyService _companyService;
@@ -16,16 +13,19 @@ public class CompanyController : ControllerBase
         _companyService = companyService;
     }
 
-    [HttpPost]
-    [Authorize]
-    public async Task<IActionResult> CreateCompany(CompanyDto companyDto)
+    [HttpPost(Name = "CreateCompany")]
+    public async Task<IActionResult> CreateCompany([FromBody] Company companyDto)
     {
-        var company = await _companyService.CreateCompanyAsync(companyDto.Name, companyDto.Users);
+        if (!ModelState.IsValid)
+        {
+            return BadRequest(ModelState);
+        }
+
+        var company = await _companyService.CreateCompanyAsync(companyDto);
         return Ok(company);
     }
 
     [HttpGet("{id}")]
-    [Authorize]
     public async Task<IActionResult> GetCompanyById(string id)
     {
         var company = await _companyService.GetCompanyByIdAsync(id);
@@ -36,11 +36,10 @@ public class CompanyController : ControllerBase
         return Ok(company);
     }
 
-    [HttpGet]
-    [Authorize]
-    public async Task<IActionResult> GetAllCompanies()
+    [HttpGet(Name = "GetCompanies")]
+    public async Task<IActionResult> GetAllCompanies([FromQuery] int page = 1, [FromQuery] int pageSize = 10)
     {
-        var companies = await _companyService.GetAllCompaniesAsync();
+        var companies = await _companyService.GetAllCompaniesAsync(page, pageSize);
         return Ok(companies);
     }
 }

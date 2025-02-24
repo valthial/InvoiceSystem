@@ -6,38 +6,34 @@ namespace InvoiceSystem.Infrastructure.Repositories;
 
 public class InvoiceRepository : IInvoiceRepository
 {
-     private readonly AppDbContext _context;
+    private readonly AppDbContext _context;
 
     public InvoiceRepository(AppDbContext context)
     {
         _context = context;
     }
 
-    public async Task AddInvoiceAsync(Invoice invoice)
+    public async Task CreateInvoiceAsync(Invoice invoice)
     {
-        await _context.Invoices.AddAsync(invoice);
+        _context.Invoices.Add(invoice);
         await _context.SaveChangesAsync();
     }
 
     public async Task<Invoice?> GetInvoiceByIdAsync(string invoiceId)
     {
         return await _context.Invoices
-            .Include(i => i.Company)
+            .Include(i => i.IssuerCompany)
             .Include(i => i.CounterPartyCompany)
             .FirstOrDefaultAsync(i => i.Id == invoiceId);
     }
 
-    public async Task<List<Invoice>> GetSentInvoicesAsync(
-        string companyId,
-        string? counterPartyCompanyId,
-        DateTimeOffset? dateIssued,
-        string? invoiceId)
+    public async Task<List<Invoice>> GetSentInvoicesAsync(string companyId, string? counterPartyCompanyId = null, DateTimeOffset? dateIssued = null, string? invoiceId = null)
     {
         var query = _context.Invoices
-            .Include(i => i.Company)
+            .Include(i => i.IssuerCompany)
             .Include(i => i.CounterPartyCompany)
-            .Where(i => i.CompanyId == companyId);
-
+            .Where(i => i.IssuerCompanyId == companyId);
+        
         if (!string.IsNullOrEmpty(counterPartyCompanyId))
         {
             query = query.Where(i => i.CounterPartyCompanyId == counterPartyCompanyId);
@@ -56,20 +52,16 @@ public class InvoiceRepository : IInvoiceRepository
         return await query.ToListAsync();
     }
 
-    public async Task<List<Invoice>> GetReceivedInvoicesAsync(
-        string companyId,
-        string? counterPartyCompanyId,
-        DateTimeOffset? dateIssued,
-        string? invoiceId)
+    public async Task<List<Invoice>> GetReceivedInvoicesAsync(string companyId, string? counterPartyCompanyId = null, DateTimeOffset? dateIssued = null, string? invoiceId = null)
     {
         var query = _context.Invoices
-            .Include(i => i.Company)
+            .Include(i => i.IssuerCompanyId)
             .Include(i => i.CounterPartyCompany)
             .Where(i => i.CounterPartyCompanyId == companyId);
 
         if (!string.IsNullOrEmpty(counterPartyCompanyId))
         {
-            query = query.Where(i => i.CompanyId == counterPartyCompanyId);
+            query = query.Where(i => i.IssuerCompanyId == counterPartyCompanyId);
         }
 
         if (dateIssued.HasValue)
@@ -83,5 +75,10 @@ public class InvoiceRepository : IInvoiceRepository
         }
 
         return await query.ToListAsync();
+    }
+
+    public async Task<bool> InvoiceExistsAsync(string invoiceId)
+    {
+        return await _context.Invoices.AnyAsync(i => i.Id == invoiceId);
     }
 }

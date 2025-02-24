@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\val\\Documents\\GitHub\\InvoiceSystem\\InvoiceSystem.Api\\InvoiceSystem.Api.csproj": {}
+    "C:\\Users\\valk\\Documents\\GitHub\\InvoiceSystem\\InvoiceSystem.Api\\InvoiceSystem.Api.csproj": {}
   },
   "projects": {
-    "C:\\Users\\val\\Documents\\GitHub\\InvoiceSystem\\InvoiceSystem.Api\\InvoiceSystem.Api.csproj": {
+    "C:\\Users\\valk\\Documents\\GitHub\\InvoiceSystem\\InvoiceSystem.Api\\InvoiceSystem.Api.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\val\\Documents\\GitHub\\InvoiceSystem\\InvoiceSystem.Api\\InvoiceSystem.Api.csproj",
+        "projectUniqueName": "C:\\Users\\valk\\Documents\\GitHub\\InvoiceSystem\\InvoiceSystem.Api\\InvoiceSystem.Api.csproj",
         "projectName": "InvoiceSystem.Api",
-        "projectPath": "C:\\Users\\val\\Documents\\GitHub\\InvoiceSystem\\InvoiceSystem.Api\\InvoiceSystem.Api.csproj",
-        "packagesPath": "C:\\Users\\val\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\val\\Documents\\GitHub\\InvoiceSystem\\InvoiceSystem.Api\\obj\\",
+        "projectPath": "C:\\Users\\valk\\Documents\\GitHub\\InvoiceSystem\\InvoiceSystem.Api\\InvoiceSystem.Api.csproj",
+        "packagesPath": "C:\\Users\\valk\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\valk\\Documents\\GitHub\\InvoiceSystem\\InvoiceSystem.Api\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\val\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\valk\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -26,17 +26,19 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "https://api.nuget.org/v3/index.json": {}
+          "C:\\Program Files\\dotnet\\library-packs": {},
+          "https://api.nuget.org/v3/index.json": {},
+          "https://pkgs.dev.azure.com/bhgprod/_packaging/BH-Tracing/nuget/v3/index.json": {}
         },
         "frameworks": {
           "net9.0": {
             "targetAlias": "net9.0",
             "projectReferences": {
-              "C:\\Users\\val\\Documents\\GitHub\\InvoiceSystem\\InvoiceSystem.Application\\InvoiceSystem.Application.csproj": {
-                "projectPath": "C:\\Users\\val\\Documents\\GitHub\\InvoiceSystem\\InvoiceSystem.Application\\InvoiceSystem.Application.csproj"
+              "C:\\Users\\valk\\Documents\\GitHub\\InvoiceSystem\\InvoiceSystem.Application\\InvoiceSystem.Application.csproj": {
+                "projectPath": "C:\\Users\\valk\\Documents\\GitHub\\InvoiceSystem\\InvoiceSystem.Application\\InvoiceSystem.Application.csproj"
               },
-              "C:\\Users\\val\\Documents\\GitHub\\InvoiceSystem\\InvoiceSystem.Infrastructure\\InvoiceSystem.Infrastructure.csproj": {
-                "projectPath": "C:\\Users\\val\\Documents\\GitHub\\InvoiceSystem\\InvoiceSystem.Infrastructure\\InvoiceSystem.Infrastructure.csproj"
+              "C:\\Users\\valk\\Documents\\GitHub\\InvoiceSystem\\InvoiceSystem.Infrastructure\\InvoiceSystem.Infrastructure.csproj": {
+                "projectPath": "C:\\Users\\valk\\Documents\\GitHub\\InvoiceSystem\\InvoiceSystem.Infrastructure\\InvoiceSystem.Infrastructure.csproj"
               }
             }
           }
@@ -57,9 +59,9 @@
         "net9.0": {
           "targetAlias": "net9.0",
           "dependencies": {
-            "Microsoft.AspNetCore.Authentication.JwtBearer": {
+            "Microsoft.AspNetCore.Http.Abstractions": {
               "target": "Package",
-              "version": "[9.0.2, )"
+              "version": "[2.3.0, )"
             },
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
@@ -107,24 +109,24 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.101/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.102/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\val\\Documents\\GitHub\\InvoiceSystem\\InvoiceSystem.Application\\InvoiceSystem.Application.csproj": {
+    "C:\\Users\\valk\\Documents\\GitHub\\InvoiceSystem\\InvoiceSystem.Application\\InvoiceSystem.Application.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\val\\Documents\\GitHub\\InvoiceSystem\\InvoiceSystem.Application\\InvoiceSystem.Application.csproj",
+        "projectUniqueName": "C:\\Users\\valk\\Documents\\GitHub\\InvoiceSystem\\InvoiceSystem.Application\\InvoiceSystem.Application.csproj",
         "projectName": "InvoiceSystem.Application",
-        "projectPath": "C:\\Users\\val\\Documents\\GitHub\\InvoiceSystem\\InvoiceSystem.Application\\InvoiceSystem.Application.csproj",
-        "packagesPath": "C:\\Users\\val\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\val\\Documents\\GitHub\\InvoiceSystem\\InvoiceSystem.Application\\obj\\",
+        "projectPath": "C:\\Users\\valk\\Documents\\GitHub\\InvoiceSystem\\InvoiceSystem.Application\\InvoiceSystem.Application.csproj",
+        "packagesPath": "C:\\Users\\valk\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\valk\\Documents\\GitHub\\InvoiceSystem\\InvoiceSystem.Application\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\val\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\valk\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -133,14 +135,16 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "https://api.nuget.org/v3/index.json": {}
+          "C:\\Program Files\\dotnet\\library-packs": {},
+          "https://api.nuget.org/v3/index.json": {},
+          "https://pkgs.dev.azure.com/bhgprod/_packaging/BH-Tracing/nuget/v3/index.json": {}
         },
         "frameworks": {
           "net9.0": {
             "targetAlias": "net9.0",
             "projectReferences": {
-              "C:\\Users\\val\\Documents\\GitHub\\InvoiceSystem\\InvoiceSystem.Domain\\InvoiceSystem.Domain.csproj": {
-                "projectPath": "C:\\Users\\val\\Documents\\GitHub\\InvoiceSystem\\InvoiceSystem.Domain\\InvoiceSystem.Domain.csproj"
+              "C:\\Users\\valk\\Documents\\GitHub\\InvoiceSystem\\InvoiceSystem.Domain\\InvoiceSystem.Domain.csproj": {
+                "projectPath": "C:\\Users\\valk\\Documents\\GitHub\\InvoiceSystem\\InvoiceSystem.Domain\\InvoiceSystem.Domain.csproj"
               }
             }
           }
@@ -169,6 +173,10 @@
               "target": "Package",
               "version": "[9.0.2, )"
             },
+            "Microsoft.Extensions.Logging.Abstractions": {
+              "target": "Package",
+              "version": "[9.0.2, )"
+            },
             "System.IdentityModel.Tokens.Jwt": {
               "target": "Package",
               "version": "[8.0.1, )"
@@ -190,24 +198,24 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.101/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.102/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\val\\Documents\\GitHub\\InvoiceSystem\\InvoiceSystem.Domain\\InvoiceSystem.Domain.csproj": {
+    "C:\\Users\\valk\\Documents\\GitHub\\InvoiceSystem\\InvoiceSystem.Domain\\InvoiceSystem.Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\val\\Documents\\GitHub\\InvoiceSystem\\InvoiceSystem.Domain\\InvoiceSystem.Domain.csproj",
+        "projectUniqueName": "C:\\Users\\valk\\Documents\\GitHub\\InvoiceSystem\\InvoiceSystem.Domain\\InvoiceSystem.Domain.csproj",
         "projectName": "InvoiceSystem.Domain",
-        "projectPath": "C:\\Users\\val\\Documents\\GitHub\\InvoiceSystem\\InvoiceSystem.Domain\\InvoiceSystem.Domain.csproj",
-        "packagesPath": "C:\\Users\\val\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\val\\Documents\\GitHub\\InvoiceSystem\\InvoiceSystem.Domain\\obj\\",
+        "projectPath": "C:\\Users\\valk\\Documents\\GitHub\\InvoiceSystem\\InvoiceSystem.Domain\\InvoiceSystem.Domain.csproj",
+        "packagesPath": "C:\\Users\\valk\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\valk\\Documents\\GitHub\\InvoiceSystem\\InvoiceSystem.Domain\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\val\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\valk\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -216,7 +224,9 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "https://api.nuget.org/v3/index.json": {}
+          "C:\\Program Files\\dotnet\\library-packs": {},
+          "https://api.nuget.org/v3/index.json": {},
+          "https://pkgs.dev.azure.com/bhgprod/_packaging/BH-Tracing/nuget/v3/index.json": {}
         },
         "frameworks": {
           "net9.0": {
@@ -261,24 +271,24 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.101/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.102/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\val\\Documents\\GitHub\\InvoiceSystem\\InvoiceSystem.Infrastructure\\InvoiceSystem.Infrastructure.csproj": {
+    "C:\\Users\\valk\\Documents\\GitHub\\InvoiceSystem\\InvoiceSystem.Infrastructure\\InvoiceSystem.Infrastructure.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\val\\Documents\\GitHub\\InvoiceSystem\\InvoiceSystem.Infrastructure\\InvoiceSystem.Infrastructure.csproj",
+        "projectUniqueName": "C:\\Users\\valk\\Documents\\GitHub\\InvoiceSystem\\InvoiceSystem.Infrastructure\\InvoiceSystem.Infrastructure.csproj",
         "projectName": "InvoiceSystem.Infrastructure",
-        "projectPath": "C:\\Users\\val\\Documents\\GitHub\\InvoiceSystem\\InvoiceSystem.Infrastructure\\InvoiceSystem.Infrastructure.csproj",
-        "packagesPath": "C:\\Users\\val\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\val\\Documents\\GitHub\\InvoiceSystem\\InvoiceSystem.Infrastructure\\obj\\",
+        "projectPath": "C:\\Users\\valk\\Documents\\GitHub\\InvoiceSystem\\InvoiceSystem.Infrastructure\\InvoiceSystem.Infrastructure.csproj",
+        "packagesPath": "C:\\Users\\valk\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\valk\\Documents\\GitHub\\InvoiceSystem\\InvoiceSystem.Infrastructure\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\val\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\valk\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -287,14 +297,16 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "https://api.nuget.org/v3/index.json": {}
+          "C:\\Program Files\\dotnet\\library-packs": {},
+          "https://api.nuget.org/v3/index.json": {},
+          "https://pkgs.dev.azure.com/bhgprod/_packaging/BH-Tracing/nuget/v3/index.json": {}
         },
         "frameworks": {
           "net9.0": {
             "targetAlias": "net9.0",
             "projectReferences": {
-              "C:\\Users\\val\\Documents\\GitHub\\InvoiceSystem\\InvoiceSystem.Application\\InvoiceSystem.Application.csproj": {
-                "projectPath": "C:\\Users\\val\\Documents\\GitHub\\InvoiceSystem\\InvoiceSystem.Application\\InvoiceSystem.Application.csproj"
+              "C:\\Users\\valk\\Documents\\GitHub\\InvoiceSystem\\InvoiceSystem.Application\\InvoiceSystem.Application.csproj": {
+                "projectPath": "C:\\Users\\valk\\Documents\\GitHub\\InvoiceSystem\\InvoiceSystem.Application\\InvoiceSystem.Application.csproj"
               }
             }
           }
@@ -319,13 +331,11 @@
               "target": "Package",
               "version": "[4.0.3, )"
             },
-            "Microsoft.EntityFrameworkCore": {
+            "Microsoft.AspNetCore.Http.Abstractions": {
               "target": "Package",
-              "version": "[9.0.2, )"
+              "version": "[2.3.0, )"
             },
-            "Microsoft.EntityFrameworkCore.Design": {
-              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
-              "suppressParent": "All",
+            "Microsoft.EntityFrameworkCore": {
               "target": "Package",
               "version": "[9.0.2, )"
             },
@@ -342,6 +352,10 @@
             "Npgsql.EntityFrameworkCore.PostgreSQL": {
               "target": "Package",
               "version": "[9.0.3, )"
+            },
+            "Npgsql.EntityFrameworkCore.PostgreSQL.Design": {
+              "target": "Package",
+              "version": "[1.1.0, )"
             },
             "System.Text.Json": {
               "target": "Package",
@@ -364,7 +378,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.101/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.102/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

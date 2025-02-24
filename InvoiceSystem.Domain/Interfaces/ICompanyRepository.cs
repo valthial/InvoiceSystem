@@ -4,7 +4,8 @@ namespace InvoiceSystem.Domain.Interfaces;
 
 public interface ICompanyRepository
 {
+    Task CreateCompanyAsync(Company company);
     Task<Company?> GetCompanyByIdAsync(string id);
-    Task<List<Company>> GetAllCompaniesAsync();
-    Task AddCompanyAsync(Company company);
+    Task<List<Company>> GetAllCompaniesAsync(int page, int pageSize);
+    Task<bool> CompanyExistsAsync(string id);
 }

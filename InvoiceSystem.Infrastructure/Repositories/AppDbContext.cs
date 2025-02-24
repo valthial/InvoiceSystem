@@ -18,6 +18,16 @@ public class AppDbContext : DbContext
     {
         base.OnModelCreating(modelBuilder);
 
+        modelBuilder.Entity<Company>(entity =>
+        {
+            entity.HasKey(c => c.Id);
+
+            entity.Property(c => c.Id)
+                .ValueGeneratedOnAdd();
+            
+            entity.Property(c => c.Name).IsRequired(); 
+        });
+        
         modelBuilder.Entity<User>(entity =>
         {
             entity.HasKey(u => u.Id);
@@ -25,32 +35,20 @@ public class AppDbContext : DbContext
             entity.Property(u => u.PasswordHash).IsRequired();
             entity.Property(u => u.CompanyId).IsRequired();
 
-            entity.HasOne(u => u.CompanyId)
-                  .WithMany(c => c.Users)
-                  .HasForeignKey(u => u.CompanyId)
-                  .OnDelete(DeleteBehavior.Restrict);
+             entity.HasOne(u => u.Company)
+                 .WithMany()
+                 .HasForeignKey(u => u.CompanyId)
+                 .OnDelete(DeleteBehavior.Restrict);
         });
 
-        modelBuilder.Entity<Company>(entity =>
-        {
-            entity.HasKey(c => c.Id);
-            entity.Property(c => c.Name).IsRequired(); 
-
-            entity.Property(c => c.Users)
-                  .HasConversion(
-                      v => JsonSerializer.Serialize(v, (System.Text.Json.JsonSerializerOptions?)null),
-                      v => JsonSerializer.Deserialize<List<User>>(v, (JsonSerializerOptions?)null)
-                  )
-                  .IsRequired();
-        });
 
         modelBuilder.Entity<Invoice>(entity =>
         {
             entity.HasKey(i => i.Id);
 
-            entity.HasOne(i => i.Company)
+            entity.HasOne(i => i.IssuerCompany)
                   .WithMany()
-                  .HasForeignKey(i => i.CompanyId)
+                  .HasForeignKey(i => i.IssuerCompanyId)
                   .OnDelete(DeleteBehavior.Restrict);
 
             entity.HasOne(i => i.CounterPartyCompany)
