@@ -1,8 +1,7 @@
-using System.Text;
+using InvoiceSystem.Api.Middleware;
+using InvoiceSystem.Api.Models;
 using InvoiceSystem.Application;
 using InvoiceSystem.Infrastructure;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -10,28 +9,10 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddInfrastructure(builder.Configuration.GetConnectionString("DefaultConnection"));
 builder.Services.AddApplication();
 builder.Services.AddControllers();
-
-var jwtSettings = builder.Configuration.GetSection("JwtSettings");
-var secretKey = jwtSettings["HardcodedToken"];
-
-builder.Services.AddAuthentication(options =>
-    {
-        options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-        options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-    })
-    .AddJwtBearer(options =>
-    {
-        options.TokenValidationParameters = new TokenValidationParameters
-        {
-            ValidateIssuer = false,
-            ValidateAudience = false,
-            ValidateIssuerSigningKey = true,
-            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiYWRtaW4iOnRydWUsImlhdCI6MTUxNjIzOTAyMn0.KMUFsIDTnFmyG3nMiGM6H9FNFUROf3wh7SmqJp-QV30")),
-            ValidateLifetime = true
-        };
-    });
-
+builder.Services.AddAuthentication();
 builder.Services.AddAuthorization();
+
+builder.Services.Configure<AppSettings>(builder.Configuration.GetSection("AppSettings"));
 
 builder.Services.AddSwaggerGen(c =>
 {
@@ -41,22 +22,17 @@ builder.Services.AddSwaggerGen(c =>
         {
             Title = "Invoice System API", 
             Version = "v1",
-            Description = "API for managing companies and invoices.",
-            Contact = new OpenApiContact
-            {
-                Name = "Valentina Koronaiou",
-                Email = "valthial@gmail.com"
-            }
+            Description = "API for managing companies and invoices."
         });
     
     c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
     {
         Name = "Authorization",
-        Type = SecuritySchemeType.Http,
+        Type = SecuritySchemeType.ApiKey,
         Scheme = "Bearer",
         BearerFormat = "JWT",
         In = ParameterLocation.Header,
-        Description = "Enter JWT token in the format: Bearer {your_token}"
+        Description = "Enter JWT token in the format: Bearer {token}"
     });
     
     c.AddSecurityRequirement(new OpenApiSecurityRequirement
@@ -70,7 +46,7 @@ builder.Services.AddSwaggerGen(c =>
                     Id = "Bearer"
                 }
             },
-            new List<string>()
+            [builder.Configuration["AppSettings:ApiToken"]]
         }
     });
 });
@@ -86,6 +62,7 @@ if (app.Environment.IsDevelopment())
     });
 }
 
+app.UseMiddleware<AuthenticationMiddleware>();
 app.UseHttpsRedirection();
 app.UseAuthentication();
 app.UseAuthorization();

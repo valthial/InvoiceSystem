@@ -31,31 +31,13 @@ public class InvoiceService(IInvoiceRepository invoiceRepository, ILogger<Invoic
 
     public async Task<Invoice?> GetInvoiceByIdAsync(int invoiceId)
     {
-        if (invoiceId == null)
-        {
-            throw new ArgumentException("Invoice ID cannot be null or whitespace.", nameof(invoiceId));
-        }
+        if (invoiceId == null) throw new ArgumentException("Invoice ID cannot be null or whitespace.", nameof(invoiceId));
 
         return await invoiceRepository.GetInvoiceByIdAsync(invoiceId);
     }
 
-    public async Task<List<Invoice>> GetSentInvoicesAsync(int companyId, int? counterPartyCompanyId = null, DateTimeOffset? dateIssued = null, int? invoiceId = null)
+    public async Task<IEnumerable<Invoice>> GetAllInvoicesAsync()
     {
-        if (companyId == null)
-        {
-            throw new ArgumentException("IssuerCompany ID cannot be null", nameof(companyId));
-        }
-
-        return await invoiceRepository.GetSentInvoicesAsync(companyId, counterPartyCompanyId, dateIssued, invoiceId);
-    }
-    
-    public async Task<List<Invoice>> GetReceivedInvoicesAsync(int companyId, int? counterPartyCompanyId = null, DateTimeOffset? dateIssued = null, int? invoiceId = null)
-    {
-        if (companyId == null)
-        {
-            throw new ArgumentException("IssuerCompany ID cannot be null", nameof(companyId));
-        }
-
-        return await invoiceRepository.GetReceivedInvoicesAsync(companyId, counterPartyCompanyId, dateIssued, invoiceId);
-    }
+        return await invoiceRepository.GetAllInvoicesAsync();
+    } 
 }

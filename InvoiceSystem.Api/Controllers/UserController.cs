@@ -8,7 +8,8 @@ using InvoiceSystem.Domain.Interfaces.Services;
 namespace InvoiceSystem.Api.Controllers;
 
 [ApiController]
-[Route("api/v1/users")]
+[Route("api/users")]
+[Attributes.Authorize]
 public class UserController(IUserService userService, IMapper mapper) : ControllerBase
 {
     [HttpPost(Name = "CreateUser")]

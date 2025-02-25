@@ -32,8 +32,8 @@ public class CompanyRepository : ICompanyRepository
             .ToListAsync();
     }
 
-    public async Task<bool> CompanyExistsAsync(int id)
+    public async Task<bool> CompanyExistsAsync(string name)
     {
-        return await _context.Companies.AnyAsync(c => c.Id == id);
+        return await _context.Companies.AnyAsync(c => c.Name == name);
     }
 }

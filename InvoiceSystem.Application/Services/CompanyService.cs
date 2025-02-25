@@ -18,10 +18,9 @@ public class CompanyService(ICompanyRepository companyRepository, ILogger<Compan
         if(!validationResult.IsValid)
             throw new ValidationException(validationResult.Errors.ToString());
 
-        // if (await companyRepository.CompanyExistsAsync(company.Id))
-        // {
-        //     throw new InvalidOperationException($"A company with the name '{company.Id}' already exists.");
-        // }
+        if (await companyRepository.CompanyExistsAsync(company.Name)) 
+            throw new InvalidOperationException($"A company with the name '{company.Name}' already exists.");
+        
         
         await companyRepository.CreateCompanyAsync(company);
         logger.LogInformation("IssuerCompany created with ID: {IssuerCompanyId}", company.Id);

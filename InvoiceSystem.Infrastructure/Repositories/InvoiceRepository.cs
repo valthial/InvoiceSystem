@@ -22,63 +22,19 @@ public class InvoiceRepository : IInvoiceRepository
     public async Task<Invoice?> GetInvoiceByIdAsync(int invoiceId)
     {
         return await _context.Invoices
-            .Include(i => i.IssuerCompany)
-            .Include(i => i.CounterPartyCompany)
+            .Include(i => i.IssuerCompanyId)
+            .Include(i => i.CounterPartyCompanyId)
             .FirstOrDefaultAsync(i => i.Id == invoiceId);
-    }
-
-    public async Task<List<Invoice>> GetSentInvoicesAsync(int companyId, int? counterPartyCompanyId = null, DateTimeOffset? dateIssued = null, int? invoiceId = null)
-    {
-        var query = _context.Invoices
-            .Include(i => i.IssuerCompany)
-            .Include(i => i.CounterPartyCompany)
-            .Where(i => i.IssuerCompanyId == companyId);
-        
-        if (counterPartyCompanyId != null)
-        {
-            query = query.Where(i => i.CounterPartyCompanyId == counterPartyCompanyId);
-        }
-
-        if (dateIssued.HasValue)
-        {
-            query = query.Where(i => i.DateIssued == dateIssued.Value);
-        }
-
-        if (invoiceId != null)
-        {
-            query = query.Where(i => i.Id == invoiceId);
-        }
-
-        return await query.ToListAsync();
-    }
-
-    public async Task<List<Invoice>> GetReceivedInvoicesAsync(int companyId, int? counterPartyCompanyId = null, DateTimeOffset? dateIssued = null, int? invoiceId = null)
-    {
-        var query = _context.Invoices
-            .Include(i => i.IssuerCompany)
-            .Include(i => i.CounterPartyCompany)
-            .Where(i => i.CounterPartyCompanyId == companyId);
-
-        if (counterPartyCompanyId != null)
-        {
-            query = query.Where(i => i.IssuerCompanyId == counterPartyCompanyId);
-        }
-
-        if (dateIssued.HasValue)
-        {
-            query = query.Where(i => i.DateIssued == dateIssued.Value);
-        }
-
-        if (invoiceId != null)
-        {
-            query = query.Where(i => i.Id == invoiceId);
-        }
-
-        return await query.ToListAsync();
     }
 
     public async Task<bool> InvoiceExistsAsync(int invoiceId)
     {
         return await _context.Invoices.AnyAsync(i => i.Id == invoiceId);
     }
+    
+    public async Task<IEnumerable<Invoice>> GetAllInvoicesAsync()
+    {
+        return await _context.Set<Invoice>().ToListAsync();
+    } 
+
 }

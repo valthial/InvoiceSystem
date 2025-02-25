@@ -2,17 +2,16 @@ using AutoMapper;
 using InvoiceSystem.Application.Dto;
 using InvoiceSystem.Domain.Entities;
 using InvoiceSystem.Domain.Interfaces.Services;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace InvoiceSystem.Api.Controllers;
 
 [ApiController]
-[Route("api/v1/companies")]
+[Route("api/companies")]
+[Attributes.Authorize]
 public class CompanyController(ICompanyService companyService, IMapper mapper) : ControllerBase
 {
-    
-    [HttpPost(Name = "CreateCompany")]
+    [HttpPost("CreateCompany")]
     public async Task<IActionResult> CreateCompany([FromBody] CompanyDto companyDto)
     {
         if (!ModelState.IsValid) return BadRequest(ModelState);
@@ -34,7 +33,7 @@ public class CompanyController(ICompanyService companyService, IMapper mapper) :
         return Ok(company);
     }
 
-    [HttpGet(Name = "GetCompanies")]
+    [HttpGet("GetAllCompanies")]
     public async Task<IActionResult> GetAllCompanies([FromQuery] int page = 1, [FromQuery] int pageSize = 10)
     {
         var companies = await companyService.GetAllCompaniesAsync(page, pageSize);

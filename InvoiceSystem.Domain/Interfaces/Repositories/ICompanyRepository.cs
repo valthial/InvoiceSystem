@@ -7,5 +7,5 @@ public interface ICompanyRepository
     Task CreateCompanyAsync(Company company);
     Task<Company?> GetCompanyByIdAsync(int id);
     Task<List<Company>> GetAllCompaniesAsync(int page, int pageSize);
-    Task<bool> CompanyExistsAsync(int id);
+    Task<bool> CompanyExistsAsync(string name);
 }

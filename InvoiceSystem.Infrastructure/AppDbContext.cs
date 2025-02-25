@@ -20,10 +20,8 @@ public class AppDbContext : DbContext
         modelBuilder.Entity<Company>(entity =>
         {
             entity.HasKey(c => c.Id);
-
             entity.Property(c => c.Id)
                 .ValueGeneratedOnAdd();
-            
             entity.Property(c => c.Name).IsRequired(); 
         });
         
@@ -40,17 +38,14 @@ public class AppDbContext : DbContext
         modelBuilder.Entity<Invoice>(entity =>
         {
             entity.HasKey(i => i.Id);
-
             entity.HasOne(i => i.IssuerCompany)
                   .WithMany()
                   .HasForeignKey(i => i.IssuerCompanyId)
                   .OnDelete(DeleteBehavior.Restrict);
-
             entity.HasOne(i => i.CounterPartyCompany)
                   .WithMany()
                   .HasForeignKey(i => i.CounterPartyCompanyId)
                   .OnDelete(DeleteBehavior.Restrict);
-
             entity.Property(i => i.DateIssued).IsRequired();
             entity.Property(i => i.NetAmount).IsRequired();
             entity.Property(i => i.VatAmount).IsRequired();

@@ -1,12 +1,13 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
+using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
 namespace InvoiceSystem.Infrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class initial : Migration
+    public partial class initialCreate : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -15,7 +16,8 @@ namespace InvoiceSystem.Infrastructure.Migrations
                 name: "Companies",
                 columns: table => new
                 {
-                    Id = table.Column<string>(type: "text", nullable: false),
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     Name = table.Column<string>(type: "text", nullable: false)
                 },
                 constraints: table =>
@@ -27,27 +29,28 @@ namespace InvoiceSystem.Infrastructure.Migrations
                 name: "Invoices",
                 columns: table => new
                 {
-                    Id = table.Column<string>(type: "text", nullable: false),
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     DateIssued = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: false),
                     NetAmount = table.Column<decimal>(type: "numeric", nullable: false),
                     VatAmount = table.Column<decimal>(type: "numeric", nullable: false),
                     TotalAmount = table.Column<decimal>(type: "numeric", nullable: false),
                     Description = table.Column<string>(type: "text", nullable: false),
-                    CompanyId = table.Column<string>(type: "text", nullable: false),
-                    CounterPartyCompanyId = table.Column<string>(type: "text", nullable: false)
+                    IssuerCompanyId = table.Column<int>(type: "integer", nullable: false),
+                    CounterPartyCompanyId = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Invoices", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Invoices_Companies_CompanyId",
-                        column: x => x.CompanyId,
+                        name: "FK_Invoices_Companies_CounterPartyCompanyId",
+                        column: x => x.CounterPartyCompanyId,
                         principalTable: "Companies",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Invoices_Companies_CounterPartyCompanyId",
-                        column: x => x.CounterPartyCompanyId,
+                        name: "FK_Invoices_Companies_IssuerCompanyId",
+                        column: x => x.IssuerCompanyId,
                         principalTable: "Companies",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
@@ -57,10 +60,12 @@ namespace InvoiceSystem.Infrastructure.Migrations
                 name: "Users",
                 columns: table => new
                 {
-                    Id = table.Column<string>(type: "text", nullable: false),
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     Email = table.Column<string>(type: "text", nullable: false),
                     PasswordHash = table.Column<string>(type: "text", nullable: false),
-                    CompanyId = table.Column<string>(type: "text", nullable: false)
+                    IssuerCompanyId = table.Column<int>(type: "integer", nullable: false),
+                    CompanyId = table.Column<int>(type: "integer", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -69,14 +74,8 @@ namespace InvoiceSystem.Infrastructure.Migrations
                         name: "FK_Users_Companies_CompanyId",
                         column: x => x.CompanyId,
                         principalTable: "Companies",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        principalColumn: "Id");
                 });
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Invoices_CompanyId",
-                table: "Invoices",
-                column: "IssuerCompanyId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Invoices_CounterPartyCompanyId",
@@ -84,9 +83,14 @@ namespace InvoiceSystem.Infrastructure.Migrations
                 column: "CounterPartyCompanyId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Invoices_IssuerCompanyId",
+                table: "Invoices",
+                column: "IssuerCompanyId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Users_CompanyId",
                 table: "Users",
-                column: "IssuerCompanyId");
+                column: "CompanyId");
         }
 
         /// <inheritdoc />

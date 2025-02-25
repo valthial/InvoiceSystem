@@ -5,23 +5,35 @@ using InvoiceSystem.Domain.Entities;
 using InvoiceSystem.Domain.Interfaces.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace InvoiceSystem.Api.Controllers;
 
 [ApiController]
-[Route("api/v1/invoices")]
-public class InvoiceController(IInvoiceService invoiceService, IMapper mapper) : ControllerBase
+[Route("api/invoices")]
+[Attributes.Authorize]
+public class InvoiceController : ControllerBase
 {
-    [HttpPost(Name = "createInvoice")]
-    public async Task<IActionResult> CreateInvoice(InvoiceDto invoiceDto)
-    {
-        if (!ModelState.IsValid) return BadRequest(ModelState);
+    private readonly IInvoiceService _invoiceService;
+    private readonly IMapper _mapper;
 
-        var invoice = mapper.Map<Invoice>(invoiceDto);
-        
+    public InvoiceController(IInvoiceService invoiceService, IMapper mapper)
+    {
+        _invoiceService = invoiceService;
+        _mapper = mapper;
+    }
+
+    [HttpPost("CreateInvoice")]
+    public async Task<IActionResult> CreateInvoice([FromBody] InvoiceDto invoiceDto)
+    {
+        if (!ModelState.IsValid)
+            return BadRequest(ModelState);
+
+        var invoice = _mapper.Map<Invoice>(invoiceDto);
+
         try
         {
-            var createdInvoice = await invoiceService.CreateInvoiceAsync(invoice);
+            var createdInvoice = await _invoiceService.CreateInvoiceAsync(invoice);
             return Ok(createdInvoice);
         }
         catch (ValidationException ex)
@@ -33,46 +45,28 @@ public class InvoiceController(IInvoiceService invoiceService, IMapper mapper) :
             return BadRequest(ex.Message);
         }
     }
-    
+
     [HttpGet("{id}")]
     public async Task<IActionResult> GetInvoiceByIdAsync(int id)
     {
-        var invoice = await invoiceService.GetInvoiceByIdAsync(id);
-
+        var invoice = await _invoiceService.GetInvoiceByIdAsync(id);
         if (invoice is null) return NotFound();
-        
         return Ok(invoice);
     }
     
-    //TODO: Does this build with swagger?
-    [HttpGet("sent", Name = "GetSentInvoices")]
-    public async Task<IActionResult> GetSentInvoices(
-        [FromQuery] int? counterPartyCompanyId,
-        [FromQuery] DateTimeOffset? dateIssued,
-        [FromQuery] int? invoiceId)
+    [HttpGet("sent")]
+    public async Task<IActionResult> GetSentInvoices([FromQuery] int companyId)
     {
-        var companyId = User.Claims.FirstOrDefault(c => c.Type == "IssuerCompanyId").Value;
-
-        if (string.IsNullOrEmpty(companyId)) return Unauthorized("IssuerCompany ID is missing in the token.");
-        int.TryParse(companyId, out int company);
-        var invoices = await invoiceService.GetSentInvoicesAsync(company, counterPartyCompanyId, dateIssued, invoiceId);
-        return Ok(invoices);
+        var invoices = await _invoiceService.GetAllInvoicesAsync();
+        var sentInvoices = invoices.Where(i => i.IssuerCompanyId == companyId).ToList();
+        return Ok(sentInvoices);
     }
 
-    //TODO: Does this build with swagger?
-    [HttpGet(Name = "received")]
-    [HttpGet("received", Name = "GetReceivedInvoices")]
-    public async Task<IActionResult> GetReceivedInvoices(
-        [FromQuery] int? counterPartyCompanyId,
-        [FromQuery] DateTimeOffset? dateIssued,
-        [FromQuery] int? invoiceId)
+    [HttpGet("received")]
+    public async Task<IActionResult> GetReceivedInvoices([FromQuery] int companyId)
     {
-        var companyId = User.Claims.FirstOrDefault(c => c.Type == "IssuerCompanyId")?.Value;
-        
-        if (string.IsNullOrEmpty(companyId)) return Unauthorized("IssuerCompany ID is missing in the token.");
-
-        int.TryParse(companyId, out int company);
-        var invoices = await invoiceService.GetReceivedInvoicesAsync(company, counterPartyCompanyId, dateIssued, invoiceId);
-        return Ok(invoices);
+        var invoices = await _invoiceService.GetAllInvoicesAsync();
+        var receivedInvoices = invoices.Where(i => i.CounterPartyCompanyId == companyId).ToList();
+        return Ok(receivedInvoices);
     }
 }
