@@ -58,7 +58,7 @@ The Invoice System API is a .NET-based web application designed to manage compan
    ```
 3. Set up the database:
   - If using Docker, the database will be automatically set up when you run the application.
-  - If not using Docker, ensure you have PostgreSQL installed and update the connection string in appsettings.json.
+  - If not using Docker, ensure you have PostgreSQL installed and update the connection string in `appsettings.json` .
 
 ### Running the Application
 1. Using Docker:
@@ -71,6 +71,36 @@ The Invoice System API is a .NET-based web application designed to manage compan
    dotnet run --project InvoiceSystem.Api
    ```
    The API will be available at http://localhost:5000 and https://localhost:5001.
+## Authentication
+
+The API uses a custom **Authentication Middleware** to secure endpoints. It validates requests using a **hardcoded token** stored in `appsettings.json`.
+
+### How It Works
+1. **Token Validation**:
+    - Requests must include an `Authorization` header with the hardcoded token.
+    - If the token is missing or invalid, a `401 Unauthorized` response is returned.
+
+2. **Configuration**:
+    - The token is defined in `appsettings.json`:
+      ```json
+      {
+        "AppSettings": {
+          "ApiToken": "hardcodedToken"
+        }
+      }
+      ```
+
+3. **Middleware Flow**:
+    - Checks the `Authorization` header.
+    - Allows valid requests to proceed and blocks invalid ones.
+
+#### Example Request
+```http
+GET /api/companies/1 HTTP/1.1
+Host: localhost:5000
+Authorization: hardcodedToken
+```
+
 ### API Endpoints
 Company Endpoints
 
@@ -90,7 +120,7 @@ User Endpoints
   - Create User: POST /api/users
   - Validate User Credentials: POST /api/users/validate
   - Get User by Email: GET /api/users/{email}
-  - Get All Users: GET /api/users
+  - Get All Users: GET /api/users/getAll
 
 ### Testing
   The project includes unit tests for the API controllers and services. To run the tests, use the following command:
