@@ -16,14 +16,14 @@ public class UserRepository : IUserRepository
     public async Task<User?> GetUserByEmailAsync(string email)
     {
         return await _context.Users
-            .Include(u => u.Company)
+            .Include(u => u.IssuerCompanyId)
             .FirstOrDefaultAsync(u => u.Email == email);
     }
 
     public async Task<List<User>> GetAllUsersAsync(int page, int pageSize)
     {
         return await _context.Users
-            .Include(u => u.Company)
+            .Include(u => u.IssuerCompanyId)
             .Skip((page - 1) * pageSize)
             .Take(pageSize)
             .ToListAsync();
@@ -35,7 +35,7 @@ public class UserRepository : IUserRepository
         await _context.SaveChangesAsync();
     }
 
-    public async Task<bool> UserExistsAsync(string email)
+    public async Task<bool> UserExistsAsync(string? email)
     {
         return await _context.Users.AnyAsync(u => u.Email == email);
     }

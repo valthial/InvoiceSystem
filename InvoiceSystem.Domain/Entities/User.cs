@@ -5,20 +5,18 @@ namespace InvoiceSystem.Domain.Entities
 {
     public sealed class User
     {
-        public string Id { get; private set; }
+        public int Id { get; private set; }
         public string Email { get; private set; }
         public string PasswordHash { get; private set; }
-        public string? CompanyId { get; private set; }
-        public Company? Company { get; private set; }
+        public int IssuerCompanyId { get; private set; }
 
-        public static User Create(string email, string passwordHash, Company company, string companyId)
+        public static User Create(string email, string passwordHash, int companyId)
         {
             var user = new User
             {
                 Email = email,
-                PasswordHash = passwordHash,
-                CompanyId = companyId,
-                Company = company
+                PasswordHash = BCrypt.Net.BCrypt.HashPassword(passwordHash),
+                IssuerCompanyId = companyId
             };
 
             var validator = new UserValidator();

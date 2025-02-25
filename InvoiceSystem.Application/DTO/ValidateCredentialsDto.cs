@@ -1,7 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace InvoiceSystem.Application.Dto;
-
+namespace InvoiceSystem.Application.DTO;
 public class ValidateCredentialsDto
 {
     [Required(ErrorMessage = "Email is required.")]

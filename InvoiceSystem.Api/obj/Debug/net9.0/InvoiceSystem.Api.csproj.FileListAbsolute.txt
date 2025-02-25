@@ -421,3 +421,4 @@ C:\Users\valk\Documents\GitHub\InvoiceSystem\InvoiceSystem.Api\obj\Debug\net9.0\
 C:\Users\valk\Documents\GitHub\InvoiceSystem\InvoiceSystem.Api\obj\Debug\net9.0\ref\InvoiceSystem.Api.dll
 C:\Users\valk\Documents\GitHub\InvoiceSystem\InvoiceSystem.Api\bin\Debug\net9.0\Microsoft.EntityFrameworkCore.Relational.Design.dll
 C:\Users\valk\Documents\GitHub\InvoiceSystem\InvoiceSystem.Api\bin\Debug\net9.0\Npgsql.EntityFrameworkCore.PostgreSQL.Design.dll
+C:\Users\valk\Documents\GitHub\InvoiceSystem\InvoiceSystem.Api\bin\Debug\net9.0\AutoMapper.dll

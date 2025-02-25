@@ -1,51 +1,40 @@
-﻿using InvoiceSystem.Application.Dto;
+﻿using AutoMapper;
+using InvoiceSystem.Application.Dto;
+using InvoiceSystem.Application.DTO;
 using Microsoft.AspNetCore.Mvc;
-using InvoiceSystem.Application.Services;
-using Microsoft.AspNetCore.Authorization;
+using InvoiceSystem.Domain.Entities;
+using InvoiceSystem.Domain.Interfaces.Services;
 
 namespace InvoiceSystem.Api.Controllers;
 
 [ApiController]
-[Authorize]
 [Route("api/v1/users")]
-public class UserController : ControllerBase
+public class UserController(IUserService userService, IMapper mapper) : ControllerBase
 {
-    private readonly UserService _userService;
-
-    public UserController(UserService userService)
-    {
-        _userService = userService;
-    }
-
     [HttpPost(Name = "CreateUser")]
     public async Task<IActionResult> CreateUser([FromBody] UserDto userDto)
     {
-        if (!ModelState.IsValid)
-        {
-            return BadRequest(ModelState);
-        }
-
-        var user = await _userService.CreateUserAsync(userDto);
+        if (!ModelState.IsValid) return BadRequest(ModelState);
+        var user = mapper.Map<User>(userDto);
+        
+        await userService.CreateUserAsync(user);
         return Ok(user);
     }
 
     [HttpGet("{email}")]
     public async Task<IActionResult> GetUserByEmail(string email)
     {
-        var user = await _userService.GetUserByIdAsync(email);
+        var user = await userService.GetUserByIdAsync(email);
 
-        if (user == null)
-        {
-            return NotFound();
-        }
-
+        if (user is null) return NotFound();
+        
         return Ok(user);
     }
 
     [HttpGet(Name = "GetUsers")]
     public async Task<IActionResult> GetAllUsers([FromQuery] int page = 1, [FromQuery] int pageSize = 10)
     {
-        var users = await _userService.GetAllUsersAsync(page, pageSize);
+        var users = await userService.GetAllUsersAsync(page, pageSize);
         return Ok(users);
     }
     
@@ -57,13 +46,13 @@ public class UserController : ControllerBase
             return BadRequest(ModelState);
         }
         
-        var result = await _userService.ValidateUserCredentialsAsync(credentials.Email, credentials.Password);
+        var result = await userService.ValidateUserCredentialsAsync(credentials.Email, credentials.Password);
 
-        if (result == null)
+        if (result is null)
         {
             return Unauthorized();
         }
 
-        return Ok(result);
+        return Ok((result.Value.UserId,result.Value.CompanyId));
     }
 }

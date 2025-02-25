@@ -1,77 +1,61 @@
 ﻿using FluentValidation;
-using InvoiceSystem.Application.Dto;
 using InvoiceSystem.Application.Validators;
 using InvoiceSystem.Domain.Entities;
 using InvoiceSystem.Domain.Interfaces;
+using InvoiceSystem.Domain.Interfaces.Services;
 using Microsoft.Extensions.Logging;
 
 namespace InvoiceSystem.Application.Services;
 
-public class InvoiceService
+public class InvoiceService(IInvoiceRepository invoiceRepository, ILogger<InvoiceService> logger)
+    : IInvoiceService
 {
-    private readonly IInvoiceRepository _invoiceRepository;
-    private readonly ILogger<InvoiceService> _logger;
-
-    public InvoiceService(IInvoiceRepository invoiceRepository, ILogger<InvoiceService> logger)
+    public async Task<Invoice> CreateInvoiceAsync(Invoice invoice)
     {
-        _invoiceRepository = invoiceRepository;
-        _logger = logger;
-    }
-    public async Task<Invoice> CreateInvoiceAsync(InvoiceDto invoiceDto)
-    {
-        var validator = new InvoiceDtoValidator();
-        var validationResult = validator.Validate(invoiceDto);
+        var validator = new InvoiceValidator();
+        var validationResult = await validator.ValidateAsync(invoice);
 
         if (!validationResult.IsValid)
             throw new ValidationException(validationResult.Errors);
 
-        if (await _invoiceRepository.InvoiceExistsAsync(invoiceDto.Id))
+        if (await invoiceRepository.InvoiceExistsAsync(invoice.Id))
         {
-            throw new InvalidOperationException($"An invoice with the ID '{invoiceDto.Id}' already exists.");
+            throw new InvalidOperationException($"An invoice with the ID '{invoice.Id}' already exists.");
         }
         
-        var invoice = Invoice.Create(
-            invoiceDto.DateIssued,
-            invoiceDto.IssuerCompanyId,
-            invoiceDto.CounterPartyCompanyId,
-            invoiceDto.NetAmount,
-            invoiceDto.VatAmount,
-            invoiceDto.TotalAmount,
-            invoiceDto.Description);
-        
-        await _invoiceRepository.CreateInvoiceAsync(invoice);
+        await invoiceRepository.CreateInvoiceAsync(invoice);
 
-        _logger.LogInformation("Invoice created with ID: {InvoiceId}", invoice.Id);
+        logger.LogInformation("Invoice created with ID: {InvoiceId}", invoice.Id);
         return invoice;
     }
 
-    public async Task<Invoice?> GetInvoiceByIdAsync(string invoiceId)
+    public async Task<Invoice?> GetInvoiceByIdAsync(int invoiceId)
     {
-        if (string.IsNullOrWhiteSpace(invoiceId))
+        if (invoiceId == null)
         {
             throw new ArgumentException("Invoice ID cannot be null or whitespace.", nameof(invoiceId));
         }
 
-        return await _invoiceRepository.GetInvoiceByIdAsync(invoiceId);
+        return await invoiceRepository.GetInvoiceByIdAsync(invoiceId);
     }
 
-    public async Task<List<Invoice>> GetSentInvoicesAsync(string companyId, string? counterPartyCompanyId = null, DateTimeOffset? dateIssued = null, string? invoiceId = null)
+    public async Task<List<Invoice>> GetSentInvoicesAsync(int companyId, int? counterPartyCompanyId = null, DateTimeOffset? dateIssued = null, int? invoiceId = null)
     {
-        if (string.IsNullOrWhiteSpace(companyId))
+        if (companyId == null)
         {
-            throw new ArgumentException("IssuerCompany ID cannot be null or whitespace.", nameof(companyId));
+            throw new ArgumentException("IssuerCompany ID cannot be null", nameof(companyId));
         }
 
-        return await _invoiceRepository.GetSentInvoicesAsync(companyId, counterPartyCompanyId, dateIssued, invoiceId);
+        return await invoiceRepository.GetSentInvoicesAsync(companyId, counterPartyCompanyId, dateIssued, invoiceId);
     }
     
-    public async Task<List<Invoice>> GetReceivedInvoicesAsync(string companyId, string? counterPartyCompanyId = null, DateTimeOffset? dateIssued = null, string? invoiceId = null)
+    public async Task<List<Invoice>> GetReceivedInvoicesAsync(int companyId, int? counterPartyCompanyId = null, DateTimeOffset? dateIssued = null, int? invoiceId = null)
     {
-        if (string.IsNullOrWhiteSpace(companyId))
+        if (companyId == null)
         {
-            throw new ArgumentException("IssuerCompany ID cannot be null or whitespace.", nameof(companyId));
+            throw new ArgumentException("IssuerCompany ID cannot be null", nameof(companyId));
         }
 
-        return await _invoiceRepository.GetReceivedInvoicesAsync(companyId, counterPartyCompanyId, dateIssued, invoiceId);
+        return await invoiceRepository.GetReceivedInvoicesAsync(companyId, counterPartyCompanyId, dateIssued, invoiceId);
     }
 }

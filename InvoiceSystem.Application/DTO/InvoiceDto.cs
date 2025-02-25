@@ -1,4 +1,6 @@
-﻿namespace InvoiceSystem.Application.Dto;
+﻿using InvoiceSystem.Domain.Entities;
+
+namespace InvoiceSystem.Application.Dto;
 
 public class InvoiceDto
 {
@@ -8,6 +10,8 @@ public class InvoiceDto
     public decimal VatAmount { get; set; }
     public decimal TotalAmount { get; set; }
     public string Description { get; set; }
-    public string IssuerCompanyId { get; set; }
-    public string CounterPartyCompanyId { get; set; }
+    public int IssuerCompanyId { get; private set; }
+    public Company IssuerCompany { get; private set; }
+    public int CounterPartyCompanyId { get; private set; }
+    public Company CounterPartyCompany { get; private set; }
 }

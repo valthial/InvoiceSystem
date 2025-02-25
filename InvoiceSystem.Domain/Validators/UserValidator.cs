@@ -16,5 +16,8 @@ public class UserValidator : AbstractValidator<User>
             .NotNull().WithMessage("Password cannot be null.")
             .NotEmpty().WithMessage("Password cannot be empty.")
             .Must(password => !string.IsNullOrWhiteSpace(password)).WithMessage("Password cannot be whitespace.");
+        
+        RuleFor(x => x.IssuerCompanyId)
+            .NotNull().WithMessage("Company cannot be empty");
     }
 }

@@ -1,37 +1,33 @@
+using AutoMapper;
 using InvoiceSystem.Application.Dto;
-using InvoiceSystem.Application.Services;
+using InvoiceSystem.Domain.Entities;
+using InvoiceSystem.Domain.Interfaces.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
+namespace InvoiceSystem.Api.Controllers;
+
 [ApiController]
-[Authorize]
-[Route("api/v1/company")]
-public class CompanyController : ControllerBase
+[Route("api/v1/companies")]
+public class CompanyController(ICompanyService companyService, IMapper mapper) : ControllerBase
 {
-    private readonly CompanyService _companyService;
-
-    public CompanyController(CompanyService companyService)
-    {
-        _companyService = companyService;
-    }
-
+    
     [HttpPost(Name = "CreateCompany")]
     public async Task<IActionResult> CreateCompany([FromBody] CompanyDto companyDto)
     {
-        if (!ModelState.IsValid)
-        {
-            return BadRequest(ModelState);
-        }
-
-        var company = await _companyService.CreateCompanyAsync(companyDto);
-        return Ok(company);
+        if (!ModelState.IsValid) return BadRequest(ModelState);
+        
+        var company = mapper.Map<Company>(companyDto);
+        
+        var createdCompany = await companyService.CreateCompanyAsync(company);
+        return Ok(createdCompany);
     }
 
     [HttpGet("{id}")]
-    public async Task<IActionResult> GetCompanyById(string id)
+    public async Task<IActionResult> GetCompanyById(int id)
     {
-        var company = await _companyService.GetCompanyByIdAsync(id);
-        if (company == null)
+        var company = await companyService.GetCompanyByIdAsync(id);
+        if (company is null)
         {
             return NotFound();
         }
@@ -41,7 +37,7 @@ public class CompanyController : ControllerBase
     [HttpGet(Name = "GetCompanies")]
     public async Task<IActionResult> GetAllCompanies([FromQuery] int page = 1, [FromQuery] int pageSize = 10)
     {
-        var companies = await _companyService.GetAllCompaniesAsync(page, pageSize);
+        var companies = await companyService.GetAllCompaniesAsync(page, pageSize);
         return Ok(companies);
     }
 }

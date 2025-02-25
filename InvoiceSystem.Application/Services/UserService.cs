@@ -1,61 +1,50 @@
 using FluentValidation;
-using InvoiceSystem.Application.Dto;
+using InvoiceSystem.Application.Validators;
 using InvoiceSystem.Domain.Entities;
 using InvoiceSystem.Domain.Interfaces;
-using InvoiceSystem.Domain.Validators;
+using InvoiceSystem.Domain.Interfaces.Services;
 using Microsoft.Extensions.Logging;
 
 namespace InvoiceSystem.Application.Services;
 
-public class UserService
+public class UserService(IUserRepository userRepository, ILogger<UserService> logger)
+    : IUserService
 {
-    private readonly IUserRepository _userRepository;
-    private readonly ILogger<UserService> _logger;
-
-    public UserService(IUserRepository userRepository, ILogger<UserService> logger)
+    public async Task<User> CreateUserAsync(User user)
     {
-        _userRepository = userRepository;
-        _logger = logger;
-    }
-
-    public async Task<User> CreateUserAsync(UserDto userDto)
-    {
-        var validator = new UserDtoValidator();
-        var validationResult = validator.Validate(userDto);
+        var validator = new UserValidator();
+        var validationResult = await validator.ValidateAsync(user);
 
         if (!validationResult.IsValid)
             throw new ValidationException(validationResult.Errors);
 
-        if (await _userRepository.UserExistsAsync(userDto.Email))
+        if (await userRepository.UserExistsAsync(user.Email))
         {
-            throw new InvalidOperationException($"A user with the email '{userDto.Email}' already exists.");
+            throw new InvalidOperationException($"A user with the email '{user.Email}' already exists.");
         }
         
-        var passwordHash = BCrypt.Net.BCrypt.HashPassword(userDto.Password);
-        var user = User.Create(userDto.Email, passwordHash, userDto.Company, userDto.CompanyId);
-        await _userRepository.CreateUserAsync(user);
+        await userRepository.CreateUserAsync(user);
 
-        _logger.LogInformation("User created with ID: {UserId}", user.Id);
+        logger.LogInformation("User created with ID: {UserId}", user.Id);
         return user;
     }
     public async Task<User?> GetUserByIdAsync(string email)
     {
-        return await _userRepository.GetUserByEmailAsync(email);
+        return await userRepository.GetUserByEmailAsync(email);
     }
 
     public async Task<List<User>> GetAllUsersAsync(int page, int pageSize)
     {
-        return await _userRepository.GetAllUsersAsync(page, pageSize);
+        return await userRepository.GetAllUsersAsync(page, pageSize);
     }
 
-    public async Task<(string UserId, string CompanyId)?> ValidateUserCredentialsAsync(string email, string password)
+    public async Task<(string UserId, int CompanyId)?> ValidateUserCredentialsAsync(string email, string password)
     {
-        var user = await _userRepository.GetUserByEmailAsync(email);
-        if (user == null || !VerifyPassword(password, user.PasswordHash)) return null;
-        if (user.Company == null) return null;
+        var user = await userRepository.GetUserByEmailAsync(email);
+        if (user is null || !VerifyPassword(password, user.PasswordHash)) return null;
         
-        return (user.Id, user.Company.Id);
+        return (user.Id.ToString(), user.IssuerCompanyId);
     }
     
-    private static bool VerifyPassword(string password, string passwordHash) => BCrypt.Net.BCrypt.Verify(password, passwordHash);
+    private static bool VerifyPassword(string password, string? passwordHash) => BCrypt.Net.BCrypt.Verify(password, passwordHash);
 }

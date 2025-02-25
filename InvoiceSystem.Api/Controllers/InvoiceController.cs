@@ -1,60 +1,78 @@
-﻿using InvoiceSystem.Application.Dto;
-using InvoiceSystem.Application.Services;
+﻿using AutoMapper;
+using FluentValidation;
+using InvoiceSystem.Application.Dto;
+using InvoiceSystem.Domain.Entities;
+using InvoiceSystem.Domain.Interfaces.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace InvoiceSystem.Api.Controllers;
 
 [ApiController]
-[Authorize]
-[Route("api/invoice")]
-public class InvoiceController : ControllerBase
+[Route("api/v1/invoices")]
+public class InvoiceController(IInvoiceService invoiceService, IMapper mapper) : ControllerBase
 {
-    private readonly InvoiceService _invoiceService;
-
-    public InvoiceController(InvoiceService invoiceService)
-    {
-        _invoiceService = invoiceService;
-    }
-
     [HttpPost(Name = "createInvoice")]
     public async Task<IActionResult> CreateInvoice(InvoiceDto invoiceDto)
     {
-        var invoice = await _invoiceService.CreateInvoiceAsync(invoiceDto);
+        if (!ModelState.IsValid) return BadRequest(ModelState);
+
+        var invoice = mapper.Map<Invoice>(invoiceDto);
+        
+        try
+        {
+            var createdInvoice = await invoiceService.CreateInvoiceAsync(invoice);
+            return Ok(createdInvoice);
+        }
+        catch (ValidationException ex)
+        {
+            return BadRequest(ex.Errors);
+        }
+        catch (InvalidOperationException ex)
+        {
+            return BadRequest(ex.Message);
+        }
+    }
+    
+    [HttpGet("{id}")]
+    public async Task<IActionResult> GetInvoiceByIdAsync(int id)
+    {
+        var invoice = await invoiceService.GetInvoiceByIdAsync(id);
+
+        if (invoice is null) return NotFound();
+        
         return Ok(invoice);
     }
     
-    [HttpGet(Name = "sent")]
+    //TODO: Does this build with swagger?
+    [HttpGet("sent", Name = "GetSentInvoices")]
     public async Task<IActionResult> GetSentInvoices(
-        [FromQuery] string? counterPartyCompanyId,
+        [FromQuery] int? counterPartyCompanyId,
         [FromQuery] DateTimeOffset? dateIssued,
-        [FromQuery] string? invoiceId)
+        [FromQuery] int? invoiceId)
     {
-        var companyId = User.Claims.FirstOrDefault(c => c.Type == "IssuerCompanyId")?.Value;
+        var companyId = User.Claims.FirstOrDefault(c => c.Type == "IssuerCompanyId").Value;
 
-        if (string.IsNullOrEmpty(companyId))
-        {
-            return Unauthorized("IssuerCompany ID is missing in the token.");
-        }
-
-        var invoices = await _invoiceService.GetSentInvoicesAsync(companyId, counterPartyCompanyId, dateIssued, invoiceId);
+        if (string.IsNullOrEmpty(companyId)) return Unauthorized("IssuerCompany ID is missing in the token.");
+        int.TryParse(companyId, out int company);
+        var invoices = await invoiceService.GetSentInvoicesAsync(company, counterPartyCompanyId, dateIssued, invoiceId);
         return Ok(invoices);
     }
 
+    //TODO: Does this build with swagger?
     [HttpGet(Name = "received")]
+    [HttpGet("received", Name = "GetReceivedInvoices")]
     public async Task<IActionResult> GetReceivedInvoices(
-        [FromQuery] string? counterPartyCompanyId,
+        [FromQuery] int? counterPartyCompanyId,
         [FromQuery] DateTimeOffset? dateIssued,
-        [FromQuery] string? invoiceId)
+        [FromQuery] int? invoiceId)
     {
         var companyId = User.Claims.FirstOrDefault(c => c.Type == "IssuerCompanyId")?.Value;
+        
+        if (string.IsNullOrEmpty(companyId)) return Unauthorized("IssuerCompany ID is missing in the token.");
 
-        if (string.IsNullOrEmpty(companyId))
-        {
-            return Unauthorized("IssuerCompany ID is missing in the token.");
-        }
-
-        var invoices = await _invoiceService.GetReceivedInvoicesAsync(companyId, counterPartyCompanyId, dateIssued, invoiceId);
+        int.TryParse(companyId, out int company);
+        var invoices = await invoiceService.GetReceivedInvoicesAsync(company, counterPartyCompanyId, dateIssued, invoiceId);
         return Ok(invoices);
     }
 }

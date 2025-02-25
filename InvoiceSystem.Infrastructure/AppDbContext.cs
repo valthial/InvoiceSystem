@@ -1,7 +1,7 @@
 using InvoiceSystem.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 
-namespace InvoiceSystem.Infrastructure.Repositories;
+namespace InvoiceSystem.Infrastructure;
 
 public class AppDbContext : DbContext
 {
@@ -31,13 +31,9 @@ public class AppDbContext : DbContext
         {
             entity.HasKey(u => u.Id);
             entity.Property(u => u.Email).IsRequired();
-            entity.Property(u => u.PasswordHash).IsRequired();
-            entity.Property(u => u.CompanyId).IsRequired();
-
-             entity.HasOne(u => u.Company)
-                 .WithMany()
-                 .HasForeignKey(u => u.CompanyId)
-                 .OnDelete(DeleteBehavior.Restrict);
+            entity.Property(u => u.PasswordHash)
+                .IsRequired();
+            entity.Property(u => u.IssuerCompanyId).IsRequired();
         });
 
 

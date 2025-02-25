@@ -19,7 +19,7 @@ public class CompanyRepository : ICompanyRepository
         await _context.SaveChangesAsync();
     }
 
-    public async Task<Company?> GetCompanyByIdAsync(string id)
+    public async Task<Company?> GetCompanyByIdAsync(int id)
     {
         return await _context.Companies.FirstOrDefaultAsync(c => c.Id == id);
     }
@@ -32,7 +32,7 @@ public class CompanyRepository : ICompanyRepository
             .ToListAsync();
     }
 
-    public async Task<bool> CompanyExistsAsync(string id)
+    public async Task<bool> CompanyExistsAsync(int id)
     {
         return await _context.Companies.AnyAsync(c => c.Id == id);
     }

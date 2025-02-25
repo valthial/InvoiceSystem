@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "klxYxrBUf9Y=",
+  "dgSpecHash": "0fkHbSWBPJo=",
   "success": true,
   "projectFilePath": "C:\\Users\\valk\\Documents\\GitHub\\InvoiceSystem\\InvoiceSystem.Api\\InvoiceSystem.Api.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\valk\\.nuget\\packages\\automapper\\14.0.0\\automapper.14.0.0.nupkg.sha512",
     "C:\\Users\\valk\\.nuget\\packages\\bcrypt.net-next\\4.0.3\\bcrypt.net-next.4.0.3.nupkg.sha512",
     "C:\\Users\\valk\\.nuget\\packages\\fluentvalidation\\12.0.0-preview1\\fluentvalidation.12.0.0-preview1.nupkg.sha512",
     "C:\\Users\\valk\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",

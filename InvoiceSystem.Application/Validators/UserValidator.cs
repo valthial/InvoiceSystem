@@ -1,24 +1,24 @@
 ﻿using FluentValidation;
-using InvoiceSystem.Application.Dto;
+using InvoiceSystem.Domain.Entities;
 
-namespace InvoiceSystem.Domain.Validators;
+namespace InvoiceSystem.Application.Validators;
 
-public class UserDtoValidator : AbstractValidator<UserDto>
+public class UserValidator : AbstractValidator<User>
 {
-    public UserDtoValidator()
+    public UserValidator()
     {
         RuleFor(x => x.Email)
             .NotNull().WithMessage("Email cannot be null.")
             .NotEmpty().WithMessage("Email cannot be empty.")
             .Must(email => !string.IsNullOrWhiteSpace(email)).WithMessage("Email cannot be whitespace.");
 
-        RuleFor(x => x.Password)
+        RuleFor(x => x.PasswordHash)
             .NotNull().WithMessage("Password cannot be null.")
             .NotEmpty().WithMessage("Password cannot be empty.")
             .Must(password => !string.IsNullOrWhiteSpace(password)).WithMessage("Password cannot be whitespace.");
 
-        RuleFor(x => x.CompanyId)
-            .NotNull().WithMessage("Company ID cannot be null.")
-            .NotEmpty().WithMessage("Company ID cannot be empty.");
+        RuleFor(x => x.IssuerCompanyId)
+            .NotNull().WithMessage("IssuerCompany ID cannot be null.")
+            .NotEmpty().WithMessage("IssuerCompany ID cannot be empty.");
     }
 }

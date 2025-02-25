@@ -7,18 +7,18 @@ public sealed class Invoice
 {
     private Invoice() { }
 
-    public string Id { get; private set; }
+    public int Id { get; private set; }
     public DateTimeOffset DateIssued { get; private set; }
     public decimal NetAmount { get; private set; }
     public decimal VatAmount { get; private set; }
     public decimal TotalAmount { get; private set; }
     public string Description { get; private set; }
-    public string IssuerCompanyId { get; private set; }
+    public int IssuerCompanyId { get; private set; }
+    public int CounterPartyCompanyId { get; private set; }
     public Company IssuerCompany { get; private set; }
-    public string CounterPartyCompanyId { get; private set; }
     public Company CounterPartyCompany { get; private set; }
 
-    public static Invoice Create(DateTimeOffset dateIssued, string issuerCompanyId, string counterPartyCompanyId, decimal netAmount, decimal vatAmount, decimal totalAmount, string description)
+    public static Invoice Create(DateTimeOffset dateIssued, int issuerCompanyId, int counterPartyCompanyId, decimal netAmount, decimal vatAmount, decimal totalAmount, string description)
     {
         var invoice = new Invoice()
         {

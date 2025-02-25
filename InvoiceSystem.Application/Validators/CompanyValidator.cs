@@ -1,11 +1,11 @@
 ﻿using FluentValidation;
-using InvoiceSystem.Application.Dto;
+using InvoiceSystem.Domain.Entities;
 
 namespace InvoiceSystem.Application.Validators;
 
-public class CompanyDtoValidator :  AbstractValidator<CompanyDto>
+public class CompanyValidator :  AbstractValidator<Company>
 {
-    public CompanyDtoValidator()
+    public CompanyValidator()
     {
         RuleFor(x => x.Name).NotNull().WithMessage("IssuerCompany name cannot be null or empty.");
     }

@@ -2,48 +2,39 @@ using InvoiceSystem.Domain.Entities;
 using InvoiceSystem.Domain.Interfaces;
 using Microsoft.Extensions.Logging;
 using System.ComponentModel.DataAnnotations;
-using InvoiceSystem.Application.Dto;
 using InvoiceSystem.Application.Validators;
+using InvoiceSystem.Domain.Interfaces.Services;
 
 namespace InvoiceSystem.Application.Services;
 
-public class CompanyService
+public class CompanyService(ICompanyRepository companyRepository, ILogger<CompanyService> logger)
+    : ICompanyService
 {
-    private readonly ICompanyRepository _companyRepository;
-    private readonly ILogger<CompanyService> _logger;
-
-    public CompanyService(ICompanyRepository companyRepository, ILogger<CompanyService> logger)
+    public async Task<Company> CreateCompanyAsync(Company company)
     {
-        _companyRepository = companyRepository;
-        _logger = logger;
-    }
-
-    public async Task<Company> CreateCompanyAsync(CompanyDto companyDto)
-    {
-        var validator = new CompanyDtoValidator();
-        var validationResult = await validator.ValidateAsync(companyDto);
+        var validator = new CompanyValidator();
+        var validationResult = await validator.ValidateAsync(company);
     
         if(!validationResult.IsValid)
             throw new ValidationException(validationResult.Errors.ToString());
 
-        if (await _companyRepository.CompanyExistsAsync(companyDto.Id))
-        {
-            throw new InvalidOperationException($"A company with the name '{companyDto.Id}' already exists.");
-        }
-
-        var company = Company.Create(companyDto.Name);
-        await _companyRepository.CreateCompanyAsync(company);
-        _logger.LogInformation("Company created with ID: {CompanyId}", company.Id);
+        // if (await companyRepository.CompanyExistsAsync(company.Id))
+        // {
+        //     throw new InvalidOperationException($"A company with the name '{company.Id}' already exists.");
+        // }
+        
+        await companyRepository.CreateCompanyAsync(company);
+        logger.LogInformation("IssuerCompany created with ID: {IssuerCompanyId}", company.Id);
         return company;
     }
 
-    public async Task<Company?> GetCompanyByIdAsync(string id)
+    public async Task<Company?> GetCompanyByIdAsync(int id)
     {
-        return await _companyRepository.GetCompanyByIdAsync(id);
+        return await companyRepository.GetCompanyByIdAsync(id);
     }
 
     public async Task<List<Company>> GetAllCompaniesAsync(int page, int pageSize)
     {
-        return await _companyRepository.GetAllCompaniesAsync(page, pageSize);
+        return await companyRepository.GetAllCompaniesAsync(page, pageSize);
     }
 }
