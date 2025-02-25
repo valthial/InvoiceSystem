@@ -23,7 +23,7 @@ public class InvoiceController : ControllerBase
         _mapper = mapper;
     }
 
-    [HttpPost("CreateInvoice")]
+    [HttpPost("create")]
     public async Task<IActionResult> CreateInvoice([FromBody] InvoiceDto invoiceDto)
     {
         if (!ModelState.IsValid)

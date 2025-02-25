@@ -12,7 +12,7 @@ namespace InvoiceSystem.Api.Controllers;
 [Attributes.Authorize]
 public class UserController(IUserService userService, IMapper mapper) : ControllerBase
 {
-    [HttpPost(Name = "CreateUser")]
+    [HttpPost(Name = "create")]
     public async Task<IActionResult> CreateUser([FromBody] UserDto userDto)
     {
         if (!ModelState.IsValid) return BadRequest(ModelState);
@@ -32,7 +32,7 @@ public class UserController(IUserService userService, IMapper mapper) : Controll
         return Ok(user);
     }
 
-    [HttpGet(Name = "GetUsers")]
+    [HttpGet(Name = "getAll")]
     public async Task<IActionResult> GetAllUsers([FromQuery] int page = 1, [FromQuery] int pageSize = 10)
     {
         var users = await userService.GetAllUsersAsync(page, pageSize);

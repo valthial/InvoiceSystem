@@ -33,7 +33,7 @@ public class CompanyController(ICompanyService companyService, IMapper mapper) :
         return Ok(company);
     }
 
-    [HttpGet("getAllCompanies")]
+    [HttpGet("getAll")]
     public async Task<IActionResult> GetAllCompanies([FromQuery] int page = 1, [FromQuery] int pageSize = 10)
     {
         var companies = await companyService.GetAllCompaniesAsync(page, pageSize);
