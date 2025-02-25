@@ -11,7 +11,7 @@ namespace InvoiceSystem.Api.Controllers;
 [Attributes.Authorize]
 public class CompanyController(ICompanyService companyService, IMapper mapper) : ControllerBase
 {
-    [HttpPost("CreateCompany")]
+    [HttpPost("create")]
     public async Task<IActionResult> CreateCompany([FromBody] CompanyDto companyDto)
     {
         if (!ModelState.IsValid) return BadRequest(ModelState);
@@ -33,7 +33,7 @@ public class CompanyController(ICompanyService companyService, IMapper mapper) :
         return Ok(company);
     }
 
-    [HttpGet("GetAllCompanies")]
+    [HttpGet("getAllCompanies")]
     public async Task<IActionResult> GetAllCompanies([FromQuery] int page = 1, [FromQuery] int pageSize = 10)
     {
         var companies = await companyService.GetAllCompaniesAsync(page, pageSize);

@@ -1,0 +1,21 @@
+# This is a generated file. Not intended for manual editing.
+version: "3.9"
+services:
+  invoicesystem.api:
+    build:
+      context: "C:\\Users\\valk\\Documents\\GitHub\\InvoiceSystem"
+      dockerfile: "InvoiceSystem.Api/Dockerfile"
+      target: "base"
+    command: []
+    entrypoint:
+    - "dotnet"
+    - "/app/bin/Debug/net9.0/InvoiceSystem.Api.dll"
+    environment:
+      DOTNET_USE_POLLING_FILE_WATCHER: "true"
+    image: "invoicesystemapi:dev"
+    ports: []
+    volumes:
+    - "C:\\Users\\valk\\Documents\\GitHub\\InvoiceSystem\\InvoiceSystem.Api:/app:rw"
+    - "C:\\Users\\valk\\Documents\\GitHub\\InvoiceSystem:/src:rw"
+    - "C:\\Users\\valk\\.nuget\\packages:/home/app/.nuget/packages"
+    working_dir: "/app"
